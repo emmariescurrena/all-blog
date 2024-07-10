@@ -39,3 +39,6 @@ buildNumber.properties
 *.zip
 *.tar.gz
 *.rar
+
+# Others #
+post-example.md
