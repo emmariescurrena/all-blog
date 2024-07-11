@@ -7,5 +7,4 @@ import com.emmariescurrena.my_blog.models.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Post findByUrl(String url);
 }
