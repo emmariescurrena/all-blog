@@ -28,7 +28,7 @@ public class Post {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
     public Post() {
@@ -41,12 +41,19 @@ public class Post {
         this.user = user;
     }
 
+    public void copyDataFromPost(Post post) {
+        this.url = post.getUrl();
+        this.title = post.getTitle();
+        this.body = post.getBody();
+        this.user = post.getUser();
+    }
+
     public Long getId() {
         return this.id;
     }
 
     public String getUrl() {
-        return url;
+        return this.url;
     }
 
     public void setUrl(String url) {
@@ -54,7 +61,7 @@ public class Post {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -62,7 +69,7 @@ public class Post {
     }
 
     public String getBody() {
-        return body;
+        return this.body;
     }
 
     public void setBody(String body) {
@@ -70,7 +77,7 @@ public class Post {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
