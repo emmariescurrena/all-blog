@@ -1,5 +1,7 @@
 package com.emmariescurrena.my_blog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
+    @JsonBackReference
     private User user;
 
     public Post() {
