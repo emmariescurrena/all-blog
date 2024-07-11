@@ -35,12 +35,17 @@ public class User {
         this.pwHash = pwHash;
     }
 
+    public void copyDataFromUser(User user) {
+        this.username = user.getUsername();
+        this.pwHash = user.getPwHash();
+    }
+
     public Long getId() {
         return this.id;
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -48,11 +53,15 @@ public class User {
     }
 
     public String getPwHash() {
-        return pwHash;
+        return this.pwHash;
     }
 
     public void setPwHash(String pwHash) {
         this.pwHash = pwHash;
+    }
+
+    public List<Post> getPosts() {
+        return this.posts;
     }
 
 }
