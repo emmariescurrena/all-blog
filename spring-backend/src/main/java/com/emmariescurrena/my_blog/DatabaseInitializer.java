@@ -1,7 +1,11 @@
 package com.emmariescurrena.my_blog;
 
+import java.util.stream.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.emmariescurrena.my_blog.models.Post;
@@ -18,23 +22,22 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Autowired
     PostRepository postDAO;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public void run(String... args) {
 
-        userDAO.save(new User("emmanuel", "$2a$10$01YESQmWVy4Xv2CCUx08sO.M1Ge5RRlOqp7zFUC9xxzTZaxJvVPq2"));
-        userDAO.save(new User("roberto", "$2a$10$BFUSAWDrROkY6XRpBJbf3OyRiW/or2Wo1OqOI3fyXY7PfXMQ4Rm8."));
+        Stream.of("emmanuel", "roberto", "john", "ricardo").forEach(name -> {
+            User user = new User(name, passwordEncoder.encode(name + "pass"));
+            userDAO.save(user);
+        });
+        userDAO.findAll().forEach(System.out::println);
 
-        postDAO.save(
-                new Post("this-is-the-title",
-                        "This is the title",
-                        "# Heading\n ## Sub-heading\nBody",
-                        userDAO.findById(1L).get()));
-
-        postDAO.save(
-                new Post("this-is-the-title-baby",
-                        "This is the title, baby",
-                        "# Heading\n ## Sub-heading\nBody",
-                        userDAO.findById(2L).get()));
+        Stream.of("1", "2", "3", "4").forEach(n -> {
+            Post post = new Post("title" + n, "Title" + n, "body" + n, userDAO.findById(Long.valueOf(n)).get());
+            postDAO.save(post);
+        });
+        postDAO.findAll().forEach(System.out::println);
 
         System.out.println("Database initialized!");
 
