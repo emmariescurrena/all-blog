@@ -12,6 +12,7 @@ import com.emmariescurrena.my_blog.models.Post;
 import com.emmariescurrena.my_blog.repositories.PostRepository;
 import com.emmariescurrena.my_blog.util.NotFoundException;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PostController {
     @Autowired
     PostRepository postDAO;
