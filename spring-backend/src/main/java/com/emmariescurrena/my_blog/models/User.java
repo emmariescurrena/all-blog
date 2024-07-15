@@ -2,6 +2,7 @@ package com.emmariescurrena.my_blog.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -25,6 +26,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String pwHash;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
