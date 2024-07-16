@@ -1,2 +1,2 @@
 # my-blog
-Blog made with Java Spring Boot
+Personal blog made with Java Spring Boot and Angular
