@@ -42,3 +42,5 @@ buildNumber.properties
 
 # Others #
 post-example.md
+.env
+curl-requests.txt
