@@ -28,6 +28,10 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
     
+    public Optional<User> getUser(Long id) {
+        return userRepository.findById(id);
+    } 
+
     public List<User> allUsers() {
         List<User> users = new ArrayList<>();
 
