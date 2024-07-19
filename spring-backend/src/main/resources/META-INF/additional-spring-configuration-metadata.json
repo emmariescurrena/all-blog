@@ -8,5 +8,25 @@
     "name": "jwt.expiration-time",
     "type": "java.lang.String",
     "description": "Jwt token expiration time expressed in milliseconds"
+  },
+  {
+    "name": "super-admin.name",
+    "type": "java.lang.String",
+    "description": "SUPER_ADMIN name"
+  },
+  {
+    "name": "super-admin.surname",
+    "type": "java.lang.String",
+    "description": "SUPER_ADMIN surname"
+  },
+  {
+    "name": "super-admin.email",
+    "type": "java.lang.String",
+    "description": "SUPER_ADMIN email"
+  },
+  {
+    "name": "super-admin.password",
+    "type": "java.lang.String",
+    "description": "SUPER_ADMIN password"
   }
 ]}
