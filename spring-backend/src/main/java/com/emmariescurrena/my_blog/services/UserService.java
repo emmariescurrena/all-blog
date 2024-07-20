@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.emmariescurrena.my_blog.dtos.RegisterUserDto;
+import com.emmariescurrena.my_blog.dtos.UpdateEmailDto;
 import com.emmariescurrena.my_blog.models.Role;
 import com.emmariescurrena.my_blog.models.RoleEnum;
 import com.emmariescurrena.my_blog.models.User;
@@ -30,7 +31,13 @@ public class UserService {
     
     public Optional<User> getUser(Long id) {
         return userRepository.findById(id);
-    } 
+    }
+
+    public User updateCurrentUserEmail(User currentUser, UpdateEmailDto updateEmailDto) {
+        currentUser.setEmail(updateEmailDto.getNewEmail());
+
+        return userRepository.save(currentUser);
+    }
 
     public List<User> allUsers() {
         List<User> users = new ArrayList<>();

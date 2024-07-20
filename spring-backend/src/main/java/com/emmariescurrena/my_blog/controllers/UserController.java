@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emmariescurrena.my_blog.dtos.UpdateEmailDto;
 import com.emmariescurrena.my_blog.models.User;
 import com.emmariescurrena.my_blog.services.UserService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -33,6 +37,16 @@ public class UserController {
         User currentUser = (User) authentication.getPrincipal();
 
         return ResponseEntity.ok(currentUser);
+    }
+
+    @PutMapping("/update/email")
+    public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateEmailDto updateEmailDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+
+        User updatedUser = userService.updateCurrentUserEmail(currentUser, updateEmailDto);
+        return ResponseEntity.ok(updatedUser);
+
     }
     
     @GetMapping("/{id}")
