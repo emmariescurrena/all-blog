@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emmariescurrena.my_blog.dtos.UpdateEmailDto;
+import com.emmariescurrena.my_blog.dtos.UpdatePasswordDto;
 import com.emmariescurrena.my_blog.models.User;
 import com.emmariescurrena.my_blog.services.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -32,19 +33,25 @@ public class UserController {
 
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        User currentUser = (User) authentication.getPrincipal();
+        User currentUser = getCurrentUser();
 
         return ResponseEntity.ok(currentUser);
     }
 
     @PutMapping("/update/email")
     public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateEmailDto updateEmailDto) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
+        User currentUser = getCurrentUser();
 
-        User updatedUser = userService.updateCurrentUserEmail(currentUser, updateEmailDto);
+        User updatedUser = userService.updateUserEmail(currentUser, updateEmailDto);
+        return ResponseEntity.ok(updatedUser);
+
+    }
+
+    @PutMapping("/update/password")
+    public ResponseEntity<User> updateCurrentUserPassword(@RequestBody UpdatePasswordDto updatePasswordDto) {
+        User currentUser = getCurrentUser();
+
+        User updatedUser = userService.updateUserPassword(currentUser, updatePasswordDto);
         return ResponseEntity.ok(updatedUser);
 
     }
@@ -56,7 +63,6 @@ public class UserController {
         return ResponseEntity.of(user);
     }
     
-
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
     public ResponseEntity<List<User>> allUsers() {
@@ -64,6 +70,10 @@ public class UserController {
 
         return ResponseEntity.ok(users);
     }
-    
+
+    private User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (User) authentication.getPrincipal();
+    }
 
 }
