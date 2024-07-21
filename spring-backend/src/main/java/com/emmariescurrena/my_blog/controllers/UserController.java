@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getCurrentUser(@PathVariable Long id) {
         Optional<User> user = userService.getUser(id);
 
         return ResponseEntity.of(user);
@@ -51,27 +51,27 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PutMapping("/update/email")
+    @PutMapping("/me/email")
     public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateEmailDto updateEmailDto) {
         User currentUser = getCurrentUser();
 
-        User updatedUser = userService.updateUserEmail(currentUser, updateEmailDto);
+        User updatedUser = userService.updateUserEmail(currentUser.getId(), updateEmailDto);
         return ResponseEntity.ok(updatedUser);
     }
 
-    @PutMapping("/update/password")
+    @PutMapping("/me/password")
     public ResponseEntity<User> updateCurrentUserPassword(@RequestBody UpdatePasswordDto updatePasswordDto) {
         User currentUser = getCurrentUser();
 
-        User updatedUser = userService.updateUserPassword(currentUser, updatePasswordDto);
+        User updatedUser = userService.updateUserPassword(currentUser.getId(), updatePasswordDto);
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/me")
     public ResponseEntity<User> deleteUser() {
         User currentUser = getCurrentUser();
 
-        userService.deleteUser(currentUser);
+        userService.deleteUser(currentUser.getId());
         return ResponseEntity.ok(currentUser);
     }
 

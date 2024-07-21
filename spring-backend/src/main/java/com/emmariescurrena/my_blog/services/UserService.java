@@ -42,20 +42,42 @@ public class UserService {
         return users;
     }
 
-    public User updateUserEmail(User user, UpdateEmailDto updateEmailDto) {
+    public User updateUserEmail(Long id, UpdateEmailDto updateEmailDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isEmpty()) {
+            return null;
+        }
+
+        User user = optionalUser.get();
         user.setEmail(updateEmailDto.getNewEmail());
 
         return userRepository.save(user);
     }
 
-    public User updateUserPassword(User user, UpdatePasswordDto updatePasswordDto) {
+    public User updateUserPassword(Long id, UpdatePasswordDto updatePasswordDto) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isEmpty()) {
+            return null;
+        }
+
+        User user = optionalUser.get();
         user.setPassword(passwordEncoder.encode(updatePasswordDto.getNewPassword()));
 
         return userRepository.save(user);
     }
 
-    public User deleteUser(User user) {
+    public User deleteUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isEmpty()) {
+            return null;
+        }
+
+        User user = optionalUser.get();
         userRepository.delete(user);
+
         return user;
     }
 
