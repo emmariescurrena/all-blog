@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,6 @@ import com.emmariescurrena.my_blog.dtos.UpdateEmailDto;
 import com.emmariescurrena.my_blog.dtos.UpdatePasswordDto;
 import com.emmariescurrena.my_blog.models.User;
 import com.emmariescurrena.my_blog.services.UserService;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -51,7 +51,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PutMapping("/me/email")
+    @PatchMapping("/me/email")
     public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateEmailDto updateEmailDto) {
         User currentUser = getCurrentUser();
 
@@ -59,7 +59,7 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    @PutMapping("/me/password")
+    @PatchMapping("/me/password")
     public ResponseEntity<User> updateCurrentUserPassword(@RequestBody UpdatePasswordDto updatePasswordDto) {
         User currentUser = getCurrentUser();
 
