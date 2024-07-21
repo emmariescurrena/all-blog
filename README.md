@@ -1,5 +1,7 @@
-# my-blog
-Personal blog made with Java Spring Boot and Angular
+# all-blog
+Blog for all
+
+Built with Java Spring Boot and Angular
 
 Export variables from .env using:
 
