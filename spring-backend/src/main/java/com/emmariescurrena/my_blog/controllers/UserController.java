@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,6 @@ import com.emmariescurrena.my_blog.models.User;
 import com.emmariescurrena.my_blog.services.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
-
 
 @RestController
 @RequestMapping("/users")
@@ -38,13 +36,27 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        Optional<User> user = userService.getUser(id);
+
+        return ResponseEntity.of(user);
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
+    public ResponseEntity<List<User>> allUsers() {
+        List<User> users = userService.allUsers();
+
+        return ResponseEntity.ok(users);
+    }
+
     @PutMapping("/update/email")
     public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateEmailDto updateEmailDto) {
         User currentUser = getCurrentUser();
 
         User updatedUser = userService.updateUserEmail(currentUser, updateEmailDto);
         return ResponseEntity.ok(updatedUser);
-
     }
 
     @PutMapping("/update/password")
@@ -53,22 +65,14 @@ public class UserController {
 
         User updatedUser = userService.updateUserPassword(currentUser, updatePasswordDto);
         return ResponseEntity.ok(updatedUser);
-
     }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        Optional<User> user = userService.getUser(id);
 
-        return ResponseEntity.of(user);
-    }
-    
-    @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN')")
-    public ResponseEntity<List<User>> allUsers() {
-        List<User> users = userService.allUsers();
+    @DeleteMapping("/delete")
+    public ResponseEntity<User> deleteUser() {
+        User currentUser = getCurrentUser();
 
-        return ResponseEntity.ok(users);
+        userService.deleteUser(currentUser);
+        return ResponseEntity.ok(currentUser);
     }
 
     private User getCurrentUser() {

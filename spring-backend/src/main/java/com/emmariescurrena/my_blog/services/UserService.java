@@ -34,6 +34,14 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public List<User> allUsers() {
+        List<User> users = new ArrayList<>();
+
+        userRepository.findAll().forEach(users::add);
+
+        return users;
+    }
+
     public User updateUserEmail(User user, UpdateEmailDto updateEmailDto) {
         user.setEmail(updateEmailDto.getNewEmail());
 
@@ -46,12 +54,9 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> allUsers() {
-        List<User> users = new ArrayList<>();
-
-        userRepository.findAll().forEach(users::add);
-
-        return users;
+    public User deleteUser(User user) {
+        userRepository.delete(user);
+        return user;
     }
 
     public User createAdministrator(RegisterUserDto input) {
