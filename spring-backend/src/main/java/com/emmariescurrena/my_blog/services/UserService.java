@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.emmariescurrena.my_blog.dtos.RegisterUserDto;
 import com.emmariescurrena.my_blog.dtos.UpdateEmailDto;
+import com.emmariescurrena.my_blog.dtos.UpdatePasswordDto;
 import com.emmariescurrena.my_blog.models.Role;
 import com.emmariescurrena.my_blog.models.RoleEnum;
 import com.emmariescurrena.my_blog.models.User;
@@ -33,10 +34,16 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User updateCurrentUserEmail(User currentUser, UpdateEmailDto updateEmailDto) {
-        currentUser.setEmail(updateEmailDto.getNewEmail());
+    public User updateUserEmail(User user, UpdateEmailDto updateEmailDto) {
+        user.setEmail(updateEmailDto.getNewEmail());
 
-        return userRepository.save(currentUser);
+        return userRepository.save(user);
+    }
+
+    public User updateUserPassword(User user, UpdatePasswordDto updatePasswordDto) {
+        user.setPassword(passwordEncoder.encode(updatePasswordDto.getNewPassword()));
+
+        return userRepository.save(user);
     }
 
     public List<User> allUsers() {
