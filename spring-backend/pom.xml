@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.emmariescurrena</groupId>
-	<artifactId>my-blog</artifactId>
+	<artifactId>all-blog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>my-blog</name>
-	<description>Personal Blog</description>
+	<name>all-blog</name>
+	<description>Blog for all</description>
 	<url/>
 	<licenses>
 		<license/>
