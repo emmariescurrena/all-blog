@@ -3,6 +3,7 @@ package com.emmariescurrena.all_blog.dtos;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.emmariescurrena.all_blog.services.UserService;
+import com.emmariescurrena.all_blog.util.RegexValidator;
 import com.emmariescurrena.all_blog.validators.ValidPassword;
 
 import jakarta.validation.constraints.AssertTrue;
@@ -19,7 +20,7 @@ public class RegisterUserDto {
     UserService userService;
 
     @NotEmpty(message = "The email is required")
-    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+    @Email(regexp = RegexValidator.EMAIL,
             flags = Pattern.Flag.CASE_INSENSITIVE,
             message = "Invalid email format")
     private String email;
