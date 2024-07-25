@@ -3,6 +3,7 @@ package com.emmariescurrena.all_blog.dtos;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.emmariescurrena.all_blog.services.UserService;
+import com.emmariescurrena.all_blog.validators.ValidPassword;
 
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
@@ -23,18 +24,9 @@ public class RegisterUserDto {
             message = "Invalid email format")
     private String email;
 
-    @AssertTrue(message = "Email already registered")
-    private boolean emailNotRegistered() {
-        return userService.getUserByEmail(email).isEmpty();
-    }
 
     @NotEmpty(message = "The password is required")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[A-Za-z\\d!@#$%^&*(),.?\":{}|<>]{8,20}$",
-            message = """
-                    Password must have at least one lowercased letter,
-                    one uppercased letter, one number, one special character,
-                    no whitespaces and length between 8 and 20,
-                    """)
+    @ValidPassword
     private String password;
 
     @NotEmpty(message = "Confirm password must be equal to password")

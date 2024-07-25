@@ -30,16 +30,16 @@ public class AuthController {
     AuthenticationService authenticationService;
 
     @PostMapping("/signup")
-    public ResponseEntity<User> register(@Valid @RequestBody RegisterUserDto registerUserDto) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
-        
+            
         return ResponseEntity
-                .created(ServletUriComponentsBuilder
-                        .fromCurrentContextPath()
-                        .path("/users/{id}")
-                        .buildAndExpand(registeredUser.getId())
-                        .toUri())
-                .build();
+            .created(ServletUriComponentsBuilder
+                    .fromCurrentContextPath()
+                    .path("/users/{id}")
+                    .buildAndExpand(registeredUser.getId())
+                    .toUri())
+            .build();
     }
     
     @PostMapping("/login")
