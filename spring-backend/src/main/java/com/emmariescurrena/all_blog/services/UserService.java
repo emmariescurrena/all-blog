@@ -38,6 +38,10 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public boolean isEmailRegistered(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     public List<User> allUsers() {
         List<User> users = new ArrayList<>();
 

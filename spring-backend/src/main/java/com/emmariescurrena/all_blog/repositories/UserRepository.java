@@ -1,3 +1,4 @@
+
 package com.emmariescurrena.all_blog.repositories;
 
 import java.util.Optional;
@@ -10,4 +11,5 @@ import com.emmariescurrena.all_blog.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
 }

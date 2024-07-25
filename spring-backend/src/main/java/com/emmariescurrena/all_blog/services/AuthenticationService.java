@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.emmariescurrena.all_blog.dtos.LoginUserDto;
 import com.emmariescurrena.all_blog.dtos.RegisterUserDto;
+import com.emmariescurrena.all_blog.exceptions.EmailAlreadyExistsException;
+import com.emmariescurrena.all_blog.exceptions.EmailNotRegisteredException;
 import com.emmariescurrena.all_blog.models.Role;
 import com.emmariescurrena.all_blog.models.RoleEnum;
 import com.emmariescurrena.all_blog.models.User;
@@ -25,38 +27,49 @@ public class AuthenticationService {
     RoleRepository roleRepository;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public User signup(RegisterUserDto input) {
+    public User signup(RegisterUserDto registerUserDto) throws EmailAlreadyExistsException {
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.USER);
 
         if (optionalRole.isEmpty()) {
             return null;
         }
 
+        if (userService.isEmailRegistered(registerUserDto.getEmail())) {
+            throw new EmailAlreadyExistsException("Email already registered: " + registerUserDto.getEmail());
+        }
+
         User user = new User();
 
-        user.setName(input.getName());
-        user.setSurname(input.getSurname());
-        user.setEmail(input.getEmail());
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setName(registerUserDto.getName());
+        user.setSurname(registerUserDto.getSurname());
+        user.setEmail(registerUserDto.getEmail());
+        user.setPassword(passwordEncoder.encode(registerUserDto.getPassword()));
         user.setRole(optionalRole.get());
 
         return userRepository.save(user);
     }
 
-    public User authenticate(LoginUserDto input) {
+    public User authenticate(LoginUserDto loginUserDto) throws EmailNotRegisteredException {
+        if (!userService.isEmailRegistered(loginUserDto.getEmail())) {
+            throw new EmailNotRegisteredException("Email already registered: " + loginUserDto.getEmail());
+        }
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        input.getEmail(),
-                        input.getPassword()
+                        loginUserDto.getEmail(),
+                        loginUserDto.getPassword()
                 )
         );
 
-        return userRepository.findByEmail(input.getEmail())
+        return userRepository.findByEmail(loginUserDto.getEmail())
                 .orElseThrow();
     }
 }
