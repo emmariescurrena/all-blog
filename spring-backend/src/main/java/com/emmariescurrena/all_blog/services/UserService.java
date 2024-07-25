@@ -9,8 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.emmariescurrena.all_blog.dtos.RegisterUserDto;
-import com.emmariescurrena.all_blog.dtos.UpdateEmailDto;
-import com.emmariescurrena.all_blog.dtos.UpdatePasswordDto;
+import com.emmariescurrena.all_blog.dtos.UpdateUserEmailDto;
+import com.emmariescurrena.all_blog.dtos.UpdateUserPasswordDto;
 import com.emmariescurrena.all_blog.models.Role;
 import com.emmariescurrena.all_blog.models.RoleEnum;
 import com.emmariescurrena.all_blog.models.User;
@@ -50,7 +50,7 @@ public class UserService {
         return users;
     }
 
-    public User updateUserEmail(Long id, UpdateEmailDto updateEmailDto) {
+    public User updateUserEmail(Long id, UpdateUserEmailDto updateEmailDto) {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
@@ -63,7 +63,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUserPassword(Long id, UpdatePasswordDto updatePasswordDto) {
+    public User updateUserPassword(Long id, UpdateUserPasswordDto updatePasswordDto) {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {

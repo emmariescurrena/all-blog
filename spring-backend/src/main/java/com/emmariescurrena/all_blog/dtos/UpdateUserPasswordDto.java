@@ -3,7 +3,7 @@ package com.emmariescurrena.all_blog.dtos;
 import lombok.Data;
 
 @Data
-public class UpdatePasswordDto {
+public class UpdateUserPasswordDto {
     private String oldPassword;
 
     private String newPassword;

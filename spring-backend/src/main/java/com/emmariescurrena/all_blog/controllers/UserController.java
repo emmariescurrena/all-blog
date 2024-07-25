@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-import com.emmariescurrena.all_blog.dtos.UpdateEmailDto;
-import com.emmariescurrena.all_blog.dtos.UpdatePasswordDto;
+import com.emmariescurrena.all_blog.dtos.UpdateUserEmailDto;
+import com.emmariescurrena.all_blog.dtos.UpdateUserPasswordDto;
 import com.emmariescurrena.all_blog.models.User;
 import com.emmariescurrena.all_blog.services.UserService;
 import static com.emmariescurrena.all_blog.util.ControllerHelperFunctions.getCurrentUser;
@@ -45,14 +45,14 @@ public class UserController {
     }
 
     @PatchMapping("/me/email")
-    public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateEmailDto updateEmailDto) {
+    public ResponseEntity<User> updateCurrentUserEmail(@RequestBody UpdateUserEmailDto updateEmailDto) {
         Long currentUserId = getCurrentUser().getId();
 
         return ResponseEntity.ok(userService.updateUserEmail(currentUserId, updateEmailDto));
     }
 
     @PatchMapping("/me/password")
-    public ResponseEntity<User> updateCurrentUserPassword(@RequestBody UpdatePasswordDto updatePasswordDto) {
+    public ResponseEntity<User> updateCurrentUserPassword(@RequestBody UpdateUserPasswordDto updatePasswordDto) {
         Long currentUserId = getCurrentUser().getId();
 
         return ResponseEntity.ok(userService.updateUserPassword(currentUserId, updatePasswordDto));
