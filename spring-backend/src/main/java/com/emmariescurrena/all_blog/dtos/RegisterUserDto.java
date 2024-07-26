@@ -1,8 +1,6 @@
 package com.emmariescurrena.all_blog.dtos;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.emmariescurrena.all_blog.services.UserService;
 import com.emmariescurrena.all_blog.util.RegexValidator;
 import com.emmariescurrena.all_blog.validators.ValidPassword;
 
@@ -15,9 +13,6 @@ import lombok.Data;
 
 @Data
 public class RegisterUserDto {
-    
-    @Autowired
-    UserService userService;
 
     @NotEmpty(message = "The email is required")
     @Email(regexp = RegexValidator.EMAIL,
