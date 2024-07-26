@@ -9,8 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.emmariescurrena.all_blog.dtos.RegisterUserDto;
-import com.emmariescurrena.all_blog.dtos.UpdateUserEmailDto;
-import com.emmariescurrena.all_blog.dtos.UpdateUserPasswordDto;
+import com.emmariescurrena.all_blog.dtos.UpdateUserDto;
 import com.emmariescurrena.all_blog.models.Role;
 import com.emmariescurrena.all_blog.models.RoleEnum;
 import com.emmariescurrena.all_blog.models.User;
@@ -50,43 +49,30 @@ public class UserService {
         return users;
     }
 
-    public User updateUserEmail(Long id, UpdateUserEmailDto updateEmailDto) {
+    public void updateUser(Long id, UpdateUserDto updateUserDto) {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
-            return null;
+            return;
         }
 
         User user = optionalUser.get();
-        user.setEmail(updateEmailDto.getNewEmail());
+        user.setEmail(updateUserDto.getEmail());
+        user.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
-    public User updateUserPassword(Long id, UpdateUserPasswordDto updatePasswordDto) {
+
+    public void deleteUser(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
-            return null;
-        }
-
-        User user = optionalUser.get();
-        user.setPassword(passwordEncoder.encode(updatePasswordDto.getNewPassword()));
-
-        return userRepository.save(user);
-    }
-
-    public User deleteUser(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            return null;
+            return;
         }
 
         User user = optionalUser.get();
         userRepository.delete(user);
-
-        return user;
     }
 
     public User createAdministrator(RegisterUserDto input) {
