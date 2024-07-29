@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 import com.emmariescurrena.all_blog.dtos.UpdateUserDto;
+import com.emmariescurrena.all_blog.exceptions.NotFoundException;
 import com.emmariescurrena.all_blog.models.RoleEnum;
 import com.emmariescurrena.all_blog.models.User;
 import com.emmariescurrena.all_blog.services.UserService;
@@ -47,16 +49,16 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @Valid @RequestBody UpdateUserDto updateUserDto) {
         if (userService.getUserById(id).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            throw new NotFoundException("User for update not found");
         }
 
         User currentUser = getCurrentUser();
 
         if (!id.equals(currentUser.getId()) && !currentUser.getAuthorities().equals(List.of(RoleEnum.SUPER_ADMIN))) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            throw new AccessDeniedException("You don't have the permission to update this user");
         }
 
-        userService.updateUser(currentUser.getId(), updateUserDto);
+        userService.updateUser(currentUser, updateUserDto);
 
         return ResponseEntity.ok().build();
     }
@@ -65,17 +67,17 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         if (userService.getUserById(id).isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            throw new NotFoundException("You don't have the permission to delete this user");
         }
 
         User currentUser = getCurrentUser();
 
-
-        if (!id.equals(currentUser.getId()) && !currentUser.getAuthorities().equals(List.of(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN")))) {
+        if (!id.equals(currentUser.getId()) &&
+            !currentUser.getAuthorities().equals(List.of(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN")))) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        userService.deleteUser(id);
+        userService.deleteUser(currentUser);
     
         return ResponseEntity.ok().build();
     }

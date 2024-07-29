@@ -49,29 +49,16 @@ public class UserService {
         return users;
     }
 
-    public void updateUser(Long id, UpdateUserDto updateUserDto) {
-        Optional<User> optionalUser = userRepository.findById(id);
+    public void updateUser(User userToUpdate, UpdateUserDto updateUserDto) {
 
-        if (optionalUser.isEmpty()) {
-            return;
-        }
+        userToUpdate.setEmail(updateUserDto.getEmail());
+        userToUpdate.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
 
-        User user = optionalUser.get();
-        user.setEmail(updateUserDto.getEmail());
-        user.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
-
-        userRepository.save(user);
+        userRepository.save(userToUpdate);
     }
 
 
-    public void deleteUser(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            return;
-        }
-
-        User user = optionalUser.get();
+    public void deleteUser(User user) {
         userRepository.delete(user);
     }
 

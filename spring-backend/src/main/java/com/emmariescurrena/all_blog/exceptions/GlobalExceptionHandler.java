@@ -21,7 +21,7 @@ import io.jsonwebtoken.security.SignatureException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleSecurityException(Exception exception) {
+    public ResponseEntity<ProblemDetail> handleSecurityException(Exception exception) {
         ProblemDetail errorDetail = null;
 
         exception.printStackTrace();
@@ -52,6 +52,9 @@ public class GlobalExceptionHandler {
         } else if (exception instanceof ExpiredJwtException) {
             errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
             errorDetail.setProperty("description", "The JWT token has expired");
+        } else if (exception instanceof NotFoundException) {
+            errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(404), exception.getMessage());
+            errorDetail.setProperty("description", "Resource not found");
         } else {
             errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
             errorDetail.setProperty("description", "Unknown internal server error.");

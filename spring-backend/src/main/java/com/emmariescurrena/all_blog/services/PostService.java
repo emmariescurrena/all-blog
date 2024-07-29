@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.emmariescurrena.all_blog.dtos.CreatePostDto;
-import com.emmariescurrena.all_blog.dtos.UpdatePostDto;
+import com.emmariescurrena.all_blog.dtos.PostDto;
 import com.emmariescurrena.all_blog.models.Post;
+import com.emmariescurrena.all_blog.models.User;
 import com.emmariescurrena.all_blog.repositories.PostRepository;
 import com.emmariescurrena.all_blog.repositories.UserRepository;
 
@@ -22,17 +22,17 @@ public class PostService {
     @Autowired
     UserRepository userRepository;
 
-    public Post save(CreatePostDto createPostDto) {
+    public Post save(PostDto postDto, User user) {
         Post post = new Post();
 
-        post.setBody(createPostDto.getBody());
-        post.setTitle(createPostDto.getTitle());
-        post.setUser(userRepository.findById(createPostDto.getUserId()).get());
+        post.setBody(postDto.getBody());
+        post.setTitle(postDto.getTitle());
+        post.setUser(userRepository.findById(user.getId()).get());
 
         return postRepository.save(post);
     }
 
-    public Optional<Post> getPost(Long id) {
+    public Optional<Post> getPostById(Long id) {
         return postRepository.findById(id);
     }
 
@@ -44,36 +44,15 @@ public class PostService {
         return posts;
     }
 
-    public Post updatePost(Long id, UpdatePostDto updatePostDto) {
-        Optional<Post> optionalPost = postRepository.findById(id);
+    public void updatePost(Post postToUpdate, PostDto postDto, User user) {
+        postToUpdate.setTitle(postDto.getTitle());
+        postToUpdate.setBody(postDto.getBody());
 
-        if (optionalPost.isEmpty()) {
-            return null;
-        }
-
-        Post post = optionalPost.get();
-        post.setTitle(updatePostDto.getTitle());
-        post.setBody(updatePostDto.getBody());
-
-        return postRepository.save(post);
+        postRepository.save(postToUpdate);
     }
 
-    public Post deletePost(Long postId, Long userId) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
-
-        if (optionalPost.isEmpty()) {
-            return null;
-        }
-
-        Post post = optionalPost.get();
-
-        if (post.getUser().getId() != userId) {
-            return null;
-        }
-
-        postRepository.delete(post);
-
-        return post;
+    public void deletePost(Post postToDelete) {
+        postRepository.delete(postToDelete);
     }
 
 }
