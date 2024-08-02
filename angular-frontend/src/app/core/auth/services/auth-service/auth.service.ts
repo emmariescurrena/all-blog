@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegisterUserDto } from '../../dtos/register-user-dto/register-user-dto';
+import { Observable } from 'rxjs';
 import { BACKEND_URL } from '../../consts/url.constants';
-import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
+export class AuthService {
 
     constructor(
         private httpClient: HttpClient
@@ -26,5 +26,4 @@ export class UserService {
                 console.log('Body:', res.body);
             })
     }
-
 }
