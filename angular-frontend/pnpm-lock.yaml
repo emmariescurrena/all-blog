@@ -38,6 +38,9 @@ importers:
       '@angular/ssr':
         specifier: ^18.1.0
         version: 18.1.2(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))
+      '@auth0/angular-jwt':
+        specifier: ^5.2.0
+        version: 5.2.0(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))
       bootstrap:
         specifier: 5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
@@ -286,6 +289,11 @@ packages:
     peerDependencies:
       '@angular/common': ^18.0.0
       '@angular/core': ^18.0.0
+
+  '@auth0/angular-jwt@5.2.0':
+    resolution: {integrity: sha512-9FS2L0QwGNlxA/zgeehCcsR9CZscouyXkoIj1fODM36A8BLfdzg9k9DWAXUQ2Drjk0AypGAFzeNZR4vsLMhdeQ==}
+    peerDependencies:
+      '@angular/common': '>=14.0.0'
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -4431,6 +4439,11 @@ snapshots:
       '@angular/common': 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
       '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
       critters: 0.0.24
+      tslib: 2.6.3
+
+  '@auth0/angular-jwt@5.2.0(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))':
+    dependencies:
+      '@angular/common': 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
       tslib: 2.6.3
 
   '@babel/code-frame@7.24.7':

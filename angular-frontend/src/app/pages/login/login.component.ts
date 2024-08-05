@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginUserDto } from '../../dtos/login-user-dto/login-user-dto';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
     styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-    public errors = [];
+    public error = "";
 
     public loginForm = new FormGroup({
         email: new FormControl("", Validators.required),
@@ -20,6 +21,7 @@ export class LoginComponent {
 
 
     constructor(
+        private authService: AuthService,
         private router: Router
     ) { }
 
@@ -29,9 +31,20 @@ export class LoginComponent {
         loginUserDto.email = this.loginForm.value.email!;
         loginUserDto.password = this.loginForm.value.password!;
 
+        this.loginUser(loginUserDto);
     }
 
-    redirectToIndex() {
-        this.router.navigate([""]);
+    loginUser(loginUserDto: LoginUserDto) {
+        this.authService.loginUser(loginUserDto).subscribe({
+            next: res => {
+                this.router.navigate(["/home"]);
+                this.authService.login(res.body.token);
+            },
+            error: e => {
+                console.log(e);
+                this.error = e.error.description;
+            }
+        });;
     }
+
 }

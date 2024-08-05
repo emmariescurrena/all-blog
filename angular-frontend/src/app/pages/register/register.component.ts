@@ -12,7 +12,6 @@ import { AuthService } from '../../services/auth-service/auth.service';
     styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-
     public errors = [];
 
     public registerForm = new FormGroup({
@@ -44,17 +43,12 @@ export class RegisterComponent {
     commitUser(registerUserDto: RegisterUserDto) {
         this.authService.createUser(registerUserDto).subscribe({
             next: res => {
-                console.log('Response status:', res.status);
-                this.redirectToLogin();
+                this.router.navigate(["/login"]);
             },
             error: e => {
                 this.errors = e.error.errors;
             }
         });;
-    }
-
-    redirectToLogin() {
-        this.router.navigate(["/login"]);
     }
 
 }

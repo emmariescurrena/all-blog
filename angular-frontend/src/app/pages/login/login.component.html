@@ -1,8 +1,6 @@
-@if (errors.length){
+@if (error){
 <div>
-    @for (error of errors; track $index) {
     <p>{{ error }}</p>
-    }
 </div>
 }
 
