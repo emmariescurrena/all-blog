@@ -28,9 +28,7 @@ export class UserComponent implements OnInit {
 
     loadUser(id: number) {
         this.userService.getUser(id).subscribe({
-            next: res => {
-                this.user = res;
-            },
+            next: res => this.user = res,
             error: e => console.log(e)
         });
     }
