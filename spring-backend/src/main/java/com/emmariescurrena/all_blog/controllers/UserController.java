@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 import com.emmariescurrena.all_blog.dtos.UpdateUserDto;
 import com.emmariescurrena.all_blog.exceptions.NotFoundException;
 import com.emmariescurrena.all_blog.models.RoleEnum;
@@ -35,9 +34,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/byId/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         return ResponseEntity.of(userService.getUserById(id));
+    }
+
+    @GetMapping("/byEmail/{email}")
+    public ResponseEntity<User> getUser(@PathVariable String email) {
+        return ResponseEntity.of(userService.getUserByEmail(email));
     }
 
     @GetMapping
@@ -63,7 +67,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         if (userService.getUserById(id).isEmpty()) {
@@ -73,12 +76,12 @@ public class UserController {
         User currentUser = getCurrentUser();
 
         if (!id.equals(currentUser.getId()) &&
-            !currentUser.getAuthorities().equals(List.of(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN")))) {
+                !currentUser.getAuthorities().equals(List.of(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN")))) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         userService.deleteUser(currentUser);
-    
+
         return ResponseEntity.ok().build();
     }
 
