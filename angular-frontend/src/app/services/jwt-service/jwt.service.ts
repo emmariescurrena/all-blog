@@ -13,7 +13,6 @@ export class JwtService {
 
     getToken() {
         return localStorage.getItem("token");
-
     }
 
     removeToken() {
@@ -27,6 +26,18 @@ export class JwtService {
             return (Math.floor((new Date).getTime() / 1000)) >= expiry;
         }
         return true;
+    }
+
+    getUserInfo() {
+        const token = this.getToken();
+        let payload;
+        if (token) {
+            payload = token.split(".")[1];
+            payload = window.atob(payload);
+            return JSON.parse(payload);
+        } else {
+            return null;
+        }
     }
 
 }
