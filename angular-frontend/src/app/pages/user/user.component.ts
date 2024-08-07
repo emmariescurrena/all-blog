@@ -21,14 +21,14 @@ export class UserComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            const id = params['id'];
+            const id = params["id"];
             this.loadUser(id);
         });
     }
 
     loadUser(id: number) {
-        this.userService.getUser(id).subscribe({
-            next: res => this.user = res,
+        this.userService.getUserById(id).subscribe({
+            next: user => this.user = user,
             error: e => console.log(e)
         });
     }
