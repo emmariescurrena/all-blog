@@ -35,12 +35,12 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity.of(userService.getUserById(id));
     }
 
     @GetMapping("/byEmail/{email}")
-    public ResponseEntity<User> getUser(@PathVariable String email) {
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         return ResponseEntity.of(userService.getUserByEmail(email));
     }
 
