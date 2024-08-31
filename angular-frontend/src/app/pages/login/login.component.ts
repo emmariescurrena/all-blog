@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginUserDto } from '../../dtos/login-user-dto/login-user-dto';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { isPlatformServer } from '@angular/common';
 
 @Component({
     selector: 'app-login',
@@ -13,6 +14,7 @@ import { AuthService } from '../../services/auth-service/auth.service';
 })
 export class LoginComponent {
     public error = "";
+    isServer = false;
 
     public loginForm = new FormGroup({
         email: new FormControl("", Validators.required),
@@ -22,8 +24,11 @@ export class LoginComponent {
 
     constructor(
         private authService: AuthService,
-        private router: Router
-    ) { }
+        private router: Router,
+        @Inject(PLATFORM_ID) platformId: Object
+    ) {
+        this.isServer = isPlatformServer(platformId);
+    }
 
     onSubmitForm() {
         const loginUserDto = new LoginUserDto();
@@ -35,13 +40,11 @@ export class LoginComponent {
     }
 
     loginUser(loginUserDto: LoginUserDto) {
-        this.authService.loginUser(loginUserDto).subscribe({
+        this.authService.login(loginUserDto).subscribe({
             next: res => {
                 this.router.navigate(["/home"]);
-                this.authService.login(res.body.token);
             },
             error: e => {
-                console.log(e);
                 this.error = e.error.description;
             }
         });
