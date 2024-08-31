@@ -1,9 +1,10 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt-interceptor/jwt.interceptor';
+import { CoolStorageModule } from '@angular-cool/storage';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -11,6 +12,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideClientHydration(),
         provideHttpClient(withFetch(), withInterceptors([JwtInterceptor])),
+        importProvidersFrom(CoolStorageModule.forRoot())
     ],
 };
 
