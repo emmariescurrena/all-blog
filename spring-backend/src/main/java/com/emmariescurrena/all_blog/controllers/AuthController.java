@@ -18,7 +18,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -32,27 +31,27 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
-            
+
         return ResponseEntity
-            .created(ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/users/{id}")
-                    .buildAndExpand(registeredUser.getId())
-                    .toUri())
-            .build();
+                .created(ServletUriComponentsBuilder
+                        .fromCurrentContextPath()
+                        .path("/users/{id}")
+                        .buildAndExpand(registeredUser.getId())
+                        .toUri())
+                .build();
     }
-    
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
-        
+
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
         LoginResponse loginResponse = new LoginResponse();
-        
+
         loginResponse.setToken(jwtToken);
-        loginResponse.setExpiresIn(jwtService.getExpirationTime());
+        loginResponse.copyPropertiesFromUser(authenticatedUser);
 
         return ResponseEntity.ok(loginResponse);
-    }   
+    }
 }
