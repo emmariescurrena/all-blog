@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@angular-cool/storage':
+        specifier: ^13.0.0
+        version: 13.0.0(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
       '@angular/animations':
         specifier: ^18.1.0
         version: 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))
@@ -102,6 +105,13 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@angular-cool/storage@13.0.0':
+    resolution: {integrity: sha512-lmoQ44P2SBaukMQvAULsYaY7R43Pk+4jKGRosPEbpzZn8noIwrsawt461eGGqWJGP5Imuj0lw3WK5ZTrkf2l9Q==}
+    peerDependencies:
+      '@angular/common': '>=10.0.0'
+      '@angular/core': '>=10.0.0'
+      rxjs: '>=6.3.3'
 
   '@angular-devkit/architect@0.1801.2':
     resolution: {integrity: sha512-y2rV8wRwTnmCH/dUo632wHi6r41Gs9XucyGm/ybzB/5tN3x6dS+O3c3zajRpdqTUr8YcD6os6sT+Ay6zS31tOw==}
@@ -4159,6 +4169,13 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@angular-cool/storage@13.0.0(@angular/common@18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1))(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/common': 18.1.2(@angular/core@18.1.2(rxjs@7.8.1)(zone.js@0.14.8))(rxjs@7.8.1)
+      '@angular/core': 18.1.2(rxjs@7.8.1)(zone.js@0.14.8)
+      rxjs: 7.8.1
+      tslib: 2.6.3
 
   '@angular-devkit/architect@0.1801.2(chokidar@3.6.0)':
     dependencies:
