@@ -1,3 +1,8 @@
+@if (loading) {
+<div class="spinner-border spinner-border-sm"></div>
+}
+@if (user) {
 <h2>{{ user.name }} {{ user.surname }}</h2>
-<p>Role: {{ user.role?.name? }} </p>
-<p>Contact: {{user.email}}</p>
+<p>Role: {{ user.role }} </p>
+<p>Contact: {{ user.email }}</p>
+}
