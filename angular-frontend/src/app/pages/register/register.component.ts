@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterUserDto } from '../../dtos/register-user-dto/register-user-dto';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth-service/auth.service';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
     selector: 'app-register',
@@ -24,7 +24,7 @@ export class RegisterComponent {
 
 
     constructor(
-        private authService: AuthService,
+        private userService: UserService,
         private router: Router
     ) { }
 
@@ -41,7 +41,7 @@ export class RegisterComponent {
     }
 
     commitUser(registerUserDto: RegisterUserDto) {
-        this.authService.createUser(registerUserDto).subscribe({
+        this.userService.createUser(registerUserDto).subscribe({
             next: res => {
                 this.router.navigate(["/login"]);
             },
