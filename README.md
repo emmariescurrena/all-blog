@@ -10,4 +10,4 @@ Run backend (maven):
 ./mvnw spring-boot:run
 
 Run frontend:
-ng serve --open
+ng serve --open --watch
