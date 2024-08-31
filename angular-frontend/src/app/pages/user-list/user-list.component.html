@@ -1,4 +1,8 @@
 <h2>User List</h2>
+@if (loading) {
+<div class="spinner-border spinner-border-sm"></div>
+}
+@if (users) {
 <table class="table table-striped">
     <thead>
         <tr>
@@ -11,11 +15,12 @@
     <tbody>
         @for (user of users; track $index) {
         <tr>
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
-            <td>{{user.surname}}</td>
-            <td>{{user.email}}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.email }}</td>
         </tr>
         }
     </tbody>
 </table>
+}

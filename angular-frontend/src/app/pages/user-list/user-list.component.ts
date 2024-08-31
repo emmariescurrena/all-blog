@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user-service/user.service';
 import { User } from '../../models/user/user';
-import { JwtService } from '../../services/jwt-service/jwt.service';
 
 @Component({
     selector: 'app-user-list',
@@ -11,21 +10,22 @@ import { JwtService } from '../../services/jwt-service/jwt.service';
     styleUrl: './user-list.component.scss'
 })
 export class UserListComponent implements OnInit {
-    public users!: User[];
+
+    public loading = false;
+    public users: User[] = [];
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
     ) { }
 
     ngOnInit() {
-        this.loadUsers();
-    }
-
-    loadUsers() {
+        this.loading = true;
         this.userService.getAllUsers().subscribe({
-            next: users => this.users = users,
+            next: users => {
+                this.users = users;
+                this.loading = false;
+            },
             error: e => console.log(e)
         });
-
     }
 }
