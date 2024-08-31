@@ -26,7 +26,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "USERS")
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,9 +50,11 @@ public class User implements UserDetails{
     private List<Post> posts;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles", 
-               joinColumns = @JoinColumn(name = "user_id"), 
-               inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Role role;
 
     public User setRole(Role role) {
@@ -62,9 +64,10 @@ public class User implements UserDetails{
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());
-        
+
         return List.of(authority);
     }
 
@@ -74,23 +77,27 @@ public class User implements UserDetails{
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
-    
+
 }
