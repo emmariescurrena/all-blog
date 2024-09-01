@@ -1,0 +1,20 @@
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+
+.navLink {
+    color: $dark;
+}
+
+.navLink:hover {
+    color: $dark;
+}
+
+.navLink:active {
+    color: $dark;
+}
+
+.navLink:focus {
+    color: $dark;
+}
