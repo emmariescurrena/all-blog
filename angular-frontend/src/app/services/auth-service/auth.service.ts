@@ -31,7 +31,6 @@ export class AuthService {
         return this.userSubject.value;
     }
 
-
     login(loginUserDto: LoginUserDto) {
         return this.httpClient
             .post<User>(`${BACKEND_URL}/auth/login`, loginUserDto)
