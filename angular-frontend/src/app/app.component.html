@@ -6,13 +6,14 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarDiv">
             <div class="navbar-nav mr-auto">
-                <a class="nav-link navLink" routerLink="/home" routerLinkActive="page" ariaCurrent="page">
-                    Home
-                </a>
-                <a class="nav-link navLink" routerLink="/register" routerLinkActive="page"
-                    ariaCurrent="page">Register</a>
-                <a class="nav-link navLink" routerLink="/login" routerLinkActive="page" ariaCurrent="page">Login</a>
-                <a class="nav-link navLink" routerLink="/logout" routerLinkActive="page" ariaCurrent="page">Logout</a>
+                @if (!user) {
+                <a class="nav-link navLink" routerLink="/register" ariaCurrent="page">Register</a>
+                <a class="nav-link navLink" routerLink="/login" ariaCurrent="page">Login</a>
+                } @else {
+                <a class="nav-link navLink" routerLink="/home" ariaCurrent="page">Home</a>
+                <a class="nav-link navLink" routerLink="/users/me" ariaCurrent="page">Profile</a>
+                <a class="nav-link navLink" routerLink="/logout" ariaCurrent="page">Logout</a>
+                }
             </div>
         </div>
     </div>
