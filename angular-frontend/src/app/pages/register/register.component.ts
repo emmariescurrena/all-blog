@@ -48,7 +48,7 @@ export class RegisterComponent {
             error: e => {
                 this.errors = e.error.errors;
             }
-        });;
+        });
     }
 
 }
