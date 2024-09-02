@@ -8,6 +8,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { Role } from './models/role/role';
 import { LogoutComponent } from './logout/logout.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
     { path: "register", component: RegisterComponent, canActivate: [AnonymousGuard] },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "logout", component: LogoutComponent, canActivate: [AuthGuard] },
+    { path: "users/me", component: ProfileComponent, canActivate: [AuthGuard] },
     { path: "users/:id", component: UserComponent, canActivate: [AuthGuard] },
     {
         path: "users",

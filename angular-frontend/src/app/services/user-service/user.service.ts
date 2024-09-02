@@ -4,6 +4,7 @@ import { BACKEND_URL } from '../../consts/url.constants';
 import { User } from '../../models/user/user';
 import { Observable } from 'rxjs';
 import { RegisterUserDto } from '../../dtos/register-user-dto/register-user-dto';
+import { UpdateUserDto } from '../../dtos/update-user-dto/update-user-dto';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,7 @@ export class UserService {
 
     createUser(registerUserDto: RegisterUserDto): Observable<any> {
         return this.httpClient
-            .post<RegisterUserDto>(`${BACKEND_URL}/auth/signup`, registerUserDto, { observe: 'response' })
+            .post(`${BACKEND_URL}/auth/signup`, registerUserDto, { observe: 'response' })
     }
 
     getUserById(id: number): Observable<User> {
@@ -29,5 +30,15 @@ export class UserService {
 
     getAllUsers(): Observable<User[]> {
         return this.httpClient.get<User[]>(`${BACKEND_URL}/users`);
+    }
+
+    updateUser(updateUserDto: UpdateUserDto, userId: number): Observable<any> {
+        return this.httpClient
+            .patch(`${BACKEND_URL}/users/${userId}`, updateUserDto, { observe: 'response' })
+    }
+
+    deleteUser(userId: number): Observable<any> {
+        return this.httpClient
+            .delete(`${BACKEND_URL}/users/${userId}`, { observe: 'response' })
     }
 }
