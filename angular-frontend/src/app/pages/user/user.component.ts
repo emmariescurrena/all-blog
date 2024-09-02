@@ -13,13 +13,13 @@ import { ActivatedRoute } from '@angular/router';
 export class UserComponent implements OnInit {
 
     public loading = false;
-    public user: User | null;
+    public userApi: User | null;
 
     constructor(
         private userService: UserService,
         private route: ActivatedRoute
     ) {
-        this.user = null;
+        this.userApi = null;
     }
 
     ngOnInit() {
@@ -32,8 +32,8 @@ export class UserComponent implements OnInit {
 
     loadUser(id: number) {
         this.userService.getUserById(id).subscribe({
-            next: user => {
-                this.user = user;
+            next: userApi => {
+                this.userApi = userApi;
                 this.loading = false;
             },
             error: e => console.log(e)
