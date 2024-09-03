@@ -1,0 +1,23 @@
+@if (errors.length){
+<div>
+    @for (error of errors; track $index) {
+    <p>{{ error }}</p>
+    }
+</div>
+}
+
+<form [formGroup]="createForm" (ngSubmit)="onSubmitForm()">
+
+    <div class="form-group">
+        <label>*Title:</label>
+        <input type="text" class="form-control" id="title" formControlName="title" name="title">
+    </div>
+
+    <div class="form-group">
+        <label>*Body:</label>
+        <textarea class="form-control" id="body" formControlName="body" name="body" rows="10"></textarea>
+    </div>
+
+    <button class="btn btn-success" type="submit" [disabled]="!createForm.valid">Submit</button>
+
+</form>
