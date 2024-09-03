@@ -52,6 +52,11 @@ public class PostController {
             .build();
     }
 
+    @GetMapping
+    public ResponseEntity<List<Post>> allPosts() {
+        return ResponseEntity.ok(postService.allPosts());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getPost(@PathVariable Long id) {
         return ResponseEntity.of(postService.getPostById(id));
