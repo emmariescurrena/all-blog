@@ -36,8 +36,9 @@ export class CreatePostComponent {
     commitPost(postDto: PostDto) {
         this.postService.createPost(postDto).subscribe({
             next: res => {
-                const locationHeader = res.headers.get('Location');
-                this.router.navigate([locationHeader]);
+                // From http://<backendUrl>/posts/<postId>, gets postId 
+                const postId = res.headers.get('Location').split("/")[4];
+                this.router.navigate([`/posts/${postId}`]);
             },
             error: e => {
                 this.errors = e.error.errors;

@@ -1,0 +1,8 @@
+@if (loading) {
+<div class="spinner-border spinner-border-sm"></div>
+}
+@if (post) {
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }} </p>
+<p>Author: {{ post.user.name }} {{ post.user.surname }}</p>
+}
