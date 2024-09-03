@@ -7,6 +7,7 @@ import { JwtService } from '../jwt-service/jwt.service';
 import { CoolLocalStorage } from '@angular-cool/storage';
 import { Router } from '@angular/router';
 import { User } from '../../models/user/user';
+import { RegisterUserDto } from '../../dtos/register-user-dto/register-user-dto';
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +30,11 @@ export class AuthService {
 
     public get userValue() {
         return this.userSubject.value;
+    }
+
+    createUser(registerUserDto: RegisterUserDto): Observable<any> {
+        return this.httpClient
+            .post(`${BACKEND_URL}/auth/signup`, registerUserDto, { observe: 'response' })
     }
 
     login(loginUserDto: LoginUserDto) {
