@@ -13,7 +13,7 @@ import { AuthService } from './services/auth-service/auth.service';
 })
 export class AppComponent {
     title = 'all-blog';
-    @Output() public user: User | null | undefined;
+    public user: User | null | undefined;
 
     constructor(
         private authService: AuthService,
