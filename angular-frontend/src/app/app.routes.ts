@@ -11,6 +11,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { PostComponent } from './pages/post/post.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
 
 export const routes: Routes = [
     { path: "register", component: RegisterComponent, canActivate: [AnonymousGuard] },
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path: "users/me", component: ProfileComponent, canActivate: [AuthGuard] },
     { path: "users/:id", component: UserComponent, canActivate: [AuthGuard] },
     { path: "posts/create-post", component: CreatePostComponent, canActivate: [AuthGuard] },
+    { path: "posts/edit-post/:id", component: EditPostComponent, canActivate: [AuthGuard] },
     { path: "posts/:id", component: PostComponent, canActivate: [AuthGuard] },
     {
         path: "users",
