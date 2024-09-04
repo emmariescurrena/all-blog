@@ -39,7 +39,7 @@ public class PostService {
     public List<Post> allPosts() {
         List<Post> posts = new ArrayList<>();
 
-        postRepository.findAll().forEach(posts::add);
+        postRepository.findAll().forEach(posts::addFirst);
 
         return posts;
     }
