@@ -24,7 +24,7 @@ export class PostService {
         return this.httpClient.get<Post>(`${BACKEND_URL}/posts/${id}`);
     }
 
-    getAllUsers(): Observable<Post[]> {
+    getAllPosts(): Observable<Post[]> {
         return this.httpClient.get<Post[]>(`${BACKEND_URL}/posts`);
     }
 
