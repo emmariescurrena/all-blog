@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../models/user/user';
 import { AuthService } from '../services/auth-service/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ import { UserService } from '../services/user-service/user.service';
     styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-    public user: User | null | undefined;
+    public user: User | null;
     public errors = [];
 
     public updateForm = new FormGroup({
