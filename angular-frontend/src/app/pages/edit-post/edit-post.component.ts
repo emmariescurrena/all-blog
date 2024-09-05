@@ -13,7 +13,7 @@ import { PostDto } from '../../dtos/post-dto/post-dto';
     styleUrl: './edit-post.component.scss'
 })
 export class EditPostComponent {
-    public errors = [];
+    public errors!: [];
     public loading = false;
     public post!: Post;
     public updateForm!: FormGroup;
@@ -46,21 +46,20 @@ export class EditPostComponent {
     onSubmitForm() {
         const postDto = new PostDto();
 
-        postDto.title = this.updateForm.value.title!;
-        postDto.body = this.updateForm.value.body!;
+        postDto.title = this.updateForm.value.title;
+        postDto.body = this.updateForm.value.body;
 
-        this.commitPost(postDto);
-    }
-
-    commitPost(postDto: PostDto) {
-        const postId = this.post?.id!;
-        this.postService.updatePost(postDto, postId).subscribe({
+        this.commitPost(postDto).subscribe({
             next: res => {
-                this.router.navigate([`/posts/${postId}`]);
+                this.router.navigate([`/posts/${this.post.id}`]);
             },
             error: e => {
                 this.errors = e.error.errors;
             }
-        })
+        });
+    }
+
+    commitPost(postDto: PostDto) {
+        return this.postService.updatePost(postDto, this.post.id);
     }
 }
