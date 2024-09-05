@@ -1,7 +1,6 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginUserDto } from '../../dtos/login-user-dto/login-user-dto';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { isPlatformServer } from '@angular/common';
 
@@ -24,7 +23,6 @@ export class LoginComponent {
 
     constructor(
         private authService: AuthService,
-        private router: Router,
         @Inject(PLATFORM_ID) platformId: Object
     ) {
         this.isServer = isPlatformServer(platformId);
@@ -36,17 +34,15 @@ export class LoginComponent {
         loginUserDto.email = this.loginForm.value.email!;
         loginUserDto.password = this.loginForm.value.password!;
 
-        this.loginUser(loginUserDto);
-    }
-
-    loginUser(loginUserDto: LoginUserDto) {
-        this.authService.login(loginUserDto).subscribe({
-            next: res => {
-            },
+        this.loginUser(loginUserDto).subscribe({
             error: e => {
                 this.error = e.error.description;
             }
         });
+    }
+
+    loginUser(loginUserDto: LoginUserDto) {
+        return this.authService.login(loginUserDto);
     }
 
 }
