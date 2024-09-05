@@ -1,8 +1,9 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginUserDto } from '../../dtos/login-user-dto/login-user-dto';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { isPlatformServer } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -11,9 +12,10 @@ import { isPlatformServer } from '@angular/common';
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
-export class LoginComponent {
-    public error = "";
-    isServer = false;
+export class LoginComponent implements OnInit {
+    public error!: string;
+    public infoMessage!: string;
+    public isServer = false;
 
     public loginForm = new FormGroup({
         email: new FormControl("", Validators.required),
@@ -23,9 +25,20 @@ export class LoginComponent {
 
     constructor(
         private authService: AuthService,
-        @Inject(PLATFORM_ID) platformId: Object
+        @Inject(PLATFORM_ID) platformId: Object,
+        private route: ActivatedRoute
     ) {
         this.isServer = isPlatformServer(platformId);
+    }
+
+
+    ngOnInit() {
+        this.route.queryParams
+            .subscribe(params => {
+                if (params['registered'] !== undefined && params['registered'] === 'true') {
+                    this.infoMessage = 'Registration successful. Please login';
+                }
+            });
     }
 
     onSubmitForm() {

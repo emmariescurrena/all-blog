@@ -1,4 +1,8 @@
 @if (!isServer) {
+
+@if (infoMessage) {
+<p>{{ infoMessage }}</p>
+}
 @if (error){
 <div>
     <p>{{ error }}</p>

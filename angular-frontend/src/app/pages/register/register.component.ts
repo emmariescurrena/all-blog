@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth-service/auth.service';
     styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-    public errors = [];
+    public errors!: [];
 
     public registerForm = new FormGroup({
         name: new FormControl("", Validators.required),
@@ -43,7 +43,7 @@ export class RegisterComponent {
     commitUser(registerUserDto: RegisterUserDto) {
         this.authService.createUser(registerUserDto).subscribe({
             next: res => {
-                this.router.navigate(["/login"]);
+                this.router.navigate(["/login"], { queryParams: { registered: 'true' } });
             },
             error: e => {
                 this.errors = e.error.errors;
