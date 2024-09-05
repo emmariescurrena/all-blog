@@ -13,14 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 export class UserComponent implements OnInit {
 
     public loading = false;
-    public userApi: User | null;
+    public userApi!: User;
 
     constructor(
         private userService: UserService,
         private route: ActivatedRoute
-    ) {
-        this.userApi = null;
-    }
+    ) { }
 
     ngOnInit() {
         this.loading = true;
