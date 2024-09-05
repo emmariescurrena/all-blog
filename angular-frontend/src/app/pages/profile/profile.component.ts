@@ -14,7 +14,7 @@ import { UserService } from '../../services/user-service/user.service';
 })
 export class ProfileComponent {
     public user: User | null;
-    public errors = [];
+    public errors!: [];
 
     public updateForm = new FormGroup({
         email: new FormControl("", Validators.required),
@@ -36,28 +36,20 @@ export class ProfileComponent {
         updateUserDto.password = this.updateForm.value.password!;
         updateUserDto.confirmPassword = this.updateForm.value.confirmPassword!;
 
-        this.commitUser(updateUserDto);
+        this.commitUser(updateUserDto).subscribe({
+            next: res => this.authService.logout(),
+            error: e => this.errors = e.error.errors
+        });
     }
 
     commitUser(updateUserDto: UpdateUserDto) {
-        this.userService.updateUser(updateUserDto, this.user?.id!).subscribe({
-            next: res => {
-                this.authService.logout();
-            },
-            error: e => {
-                this.errors = e.error.errors;
-            }
-        });
+        return this.userService.updateUser(updateUserDto, this.user?.id!);
     }
 
     onDelete() {
         this.userService.deleteUser(this.user?.id!).subscribe({
-            next: res => {
-                this.authService.logout();
-            },
-            error: e => {
-                this.errors = e.error.errors;
-            }
+            next: res => this.authService.logout(),
+            error: e => this.errors = e.error.errors
         });
     }
 }
