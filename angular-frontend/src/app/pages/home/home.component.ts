@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 export class HomeComponent implements OnInit {
 
     public loading = false;
-    public posts: Post[] = [];
+    public posts!: Post[];
 
     constructor(
         private postService: PostService
