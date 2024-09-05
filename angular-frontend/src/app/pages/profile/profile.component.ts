@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { User } from '../models/user/user';
-import { AuthService } from '../services/auth-service/auth.service';
+import { User } from '../../models/user/user';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UpdateUserDto } from '../dtos/update-user-dto/update-user-dto';
-import { UserService } from '../services/user-service/user.service';
+import { UpdateUserDto } from '../../dtos/update-user-dto/update-user-dto';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
     selector: 'app-profile',

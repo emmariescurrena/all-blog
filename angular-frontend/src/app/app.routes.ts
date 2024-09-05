@@ -8,7 +8,7 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { Role } from './models/role/role';
 import { LogoutComponent } from './logout/logout.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { PostComponent } from './pages/post/post.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
