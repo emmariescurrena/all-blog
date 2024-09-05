@@ -48,9 +48,7 @@ export class LoginComponent implements OnInit {
         loginUserDto.password = this.loginForm.value.password!;
 
         this.loginUser(loginUserDto).subscribe({
-            error: e => {
-                this.error = e.error.description;
-            }
+            error: e => this.error = e.error.description
         });
     }
 
