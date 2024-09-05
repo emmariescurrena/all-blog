@@ -43,6 +43,7 @@ export class AuthService {
             .pipe(map(user => {
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
+                this.router.navigate(['/home']);
                 return user;
             }))
     }

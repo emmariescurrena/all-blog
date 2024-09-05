@@ -42,7 +42,6 @@ export class LoginComponent {
     loginUser(loginUserDto: LoginUserDto) {
         this.authService.login(loginUserDto).subscribe({
             next: res => {
-                this.router.navigate(["/home"]);
             },
             error: e => {
                 this.error = e.error.description;
