@@ -34,7 +34,7 @@ export class AuthService {
 
     createUser(registerUserDto: RegisterUserDto): Observable<any> {
         return this.httpClient
-            .post(`${BACKEND_URL}/auth/signup`, registerUserDto, { observe: 'response' })
+            .post(`${BACKEND_URL}/auth/signup`, registerUserDto)
     }
 
     login(loginUserDto: LoginUserDto) {
