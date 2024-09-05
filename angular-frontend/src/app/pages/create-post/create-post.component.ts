@@ -30,11 +30,7 @@ export class CreatePostComponent {
         postDto.title = this.createForm.value.title!;
         postDto.body = this.createForm.value.body!;
 
-        this.commitPost(postDto);
-    }
-
-    commitPost(postDto: PostDto) {
-        this.postService.createPost(postDto).subscribe({
+        this.commitPost(postDto).subscribe({
             next: res => {
                 // From http://<backendUrl>/posts/<postId>, gets postId 
                 const postId = res.headers.get('Location').split("/")[4];
@@ -43,6 +39,10 @@ export class CreatePostComponent {
             error: e => {
                 this.errors = e.error.errors;
             }
-        })
+        });
+    }
+
+    commitPost(postDto: PostDto) {
+        return this.postService.createPost(postDto);
     }
 }
