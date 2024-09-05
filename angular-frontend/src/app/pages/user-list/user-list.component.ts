@@ -12,7 +12,7 @@ import { User } from '../../models/user/user';
 export class UserListComponent implements OnInit {
 
     public loading = false;
-    public users: User[] = [];
+    public users!: User[];
 
     constructor(
         private userService: UserService,
