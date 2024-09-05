@@ -1,4 +1,4 @@
-@if (errors.length){
+@if (errors){
 <div>
     @for (error of errors; track $index) {
     <p>{{ error }}</p>
@@ -26,3 +26,5 @@
 
 </form>
 }
+
+<button class="btn btn-danger" type="submit" (click)="onDelete()">Delete post</button>

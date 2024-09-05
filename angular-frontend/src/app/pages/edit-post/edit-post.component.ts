@@ -42,7 +42,6 @@ export class EditPostComponent {
         });
     }
 
-
     onSubmitForm() {
         const postDto = new PostDto();
 
@@ -61,5 +60,12 @@ export class EditPostComponent {
 
     commitPost(postDto: PostDto) {
         return this.postService.updatePost(postDto, this.post.id);
+    }
+
+    onDelete() {
+        this.postService.deletePost(this.post.id).subscribe({
+            next: res => this.router.navigate(['/home']),
+            error: e => this.errors = e.error.errors
+        });
     }
 }
