@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PostService } from '../../services/post-service/post.service';
 import { Post } from '../../models/post/post';
@@ -12,10 +12,11 @@ import { AuthService } from '../../services/auth-service/auth.service';
     templateUrl: './post.component.html',
     styleUrl: './post.component.scss'
 })
-export class PostComponent {
+export class PostComponent implements OnInit {
     public loading = false;
     public user: User | null;
     public post!: Post;
+    public infoMessage!: string;
 
     constructor(
         private postService: PostService,

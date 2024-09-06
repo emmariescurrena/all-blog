@@ -1,6 +1,7 @@
 @if (loading) {
 <div class="spinner-border spinner-border-sm"></div>
 }
+
 @if (post) {
 @if (user?.id == post.user.id) {
 <a routerLink="/posts/edit-post/{{ post.id }}" ariaCurrent="page" class="btn btn-primary btn-lg rounded-pill">

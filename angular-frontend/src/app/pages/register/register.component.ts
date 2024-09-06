@@ -43,7 +43,10 @@ export class RegisterComponent {
     commitUser(registerUserDto: RegisterUserDto) {
         this.authService.createUser(registerUserDto).subscribe({
             next: res => {
-                this.router.navigate(["/login"], { queryParams: { registered: 'true' } });
+                this.router.navigate(
+                    ["/login"],
+                    { queryParams: { infoMessage: 'Registration successful. Please login' } }
+                );
             },
             error: e => {
                 this.errors = e.error.errors;

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Post } from '../../models/post/post';
 import { PostService } from '../../services/post-service/post.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostDto } from '../../dtos/post-dto/post-dto';
+import { User } from '../../models/user/user';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
     selector: 'app-edit-post',
@@ -15,6 +17,7 @@ import { PostDto } from '../../dtos/post-dto/post-dto';
 export class EditPostComponent {
     public errors!: [];
     public loading = false;
+    public user: User | null;
     public post!: Post;
     public updateForm!: FormGroup;
 
@@ -22,7 +25,9 @@ export class EditPostComponent {
         private postService: PostService,
         private route: ActivatedRoute,
         private router: Router
-    ) { }
+    ) {
+        this.user = inject(AuthService).userValue;
+    }
 
     ngOnInit() {
         this.loading = true;
@@ -35,10 +40,16 @@ export class EditPostComponent {
                         title: new FormControl(this.post?.title, Validators.required),
                         body: new FormControl(this.post?.body, Validators.required)
                     });
-                    this.loading = false;
+                    if (this.user?.id !== this.post.user.id) {
+                        this.router.navigate(
+                            [`/posts/${this.post.id}`],
+                            { queryParams: { infoMessage: 'Not allowed to edit this post' } }
+                        );
+                    }
                 },
                 error: e => console.log(e)
             });
+            this.loading = false;
         });
     }
 

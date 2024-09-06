@@ -19,4 +19,8 @@
     </div>
 </nav>
 
+@if (infoMessage) {
+<p>{{ infoMessage }}</p>
+}
+
 <router-outlet />

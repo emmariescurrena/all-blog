@@ -12,9 +12,8 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     public error!: string;
-    public infoMessage!: string;
     public isServer = false;
 
     public loginForm = new FormGroup({
@@ -31,15 +30,6 @@ export class LoginComponent implements OnInit {
         this.isServer = isPlatformServer(platformId);
     }
 
-
-    ngOnInit() {
-        this.route.queryParams
-            .subscribe(params => {
-                if (params['registered'] !== undefined && params['registered'] === 'true') {
-                    this.infoMessage = 'Registration successful. Please login';
-                }
-            });
-    }
 
     onSubmitForm() {
         const loginUserDto = new LoginUserDto();
