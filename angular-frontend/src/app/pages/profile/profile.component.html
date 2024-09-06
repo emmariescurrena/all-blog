@@ -3,7 +3,7 @@
 <p>Role: {{ user.role }} </p>
 <p>Contact: {{ user.email }}</p>
 
-@if (errors.length){
+@if (errors){
 <div>
     @for (error of errors; track $index) {
     <p>{{ error }}</p>
