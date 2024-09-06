@@ -16,8 +16,7 @@ export class PostService {
     ) { }
 
     createPost(postDto: PostDto): Observable<any> {
-        return this.httpClient
-            .post(`${BACKEND_URL}/posts`, postDto, { observe: 'response' })
+        return this.httpClient.post(`${BACKEND_URL}/posts`, postDto)
     }
 
     getPost(id: number): Observable<Post> {
@@ -29,13 +28,11 @@ export class PostService {
     }
 
     updatePost(postDto: PostDto, postId: number): Observable<any> {
-        return this.httpClient
-            .patch(`${BACKEND_URL}/posts/${postId}`, postDto, { observe: 'response' })
+        return this.httpClient.patch(`${BACKEND_URL}/posts/${postId}`, postDto)
     }
 
     deletePost(postId: number): Observable<any> {
-        return this.httpClient
-            .delete(`${BACKEND_URL}/posts/${postId}`, { observe: 'response' })
+        return this.httpClient.delete(`${BACKEND_URL}/posts/${postId}`)
     }
 
 }
