@@ -27,12 +27,10 @@ export class UserService {
     }
 
     updateUser(updateUserDto: UpdateUserDto, userId: number): Observable<any> {
-        return this.httpClient
-            .patch(`${BACKEND_URL}/users/${userId}`, updateUserDto, { observe: 'response' })
+        return this.httpClient.patch(`${BACKEND_URL}/users/${userId}`, updateUserDto)
     }
 
     deleteUser(userId: number): Observable<any> {
-        return this.httpClient
-            .delete(`${BACKEND_URL}/users/${userId}`, { observe: 'response' })
+        return this.httpClient.delete(`${BACKEND_URL}/users/${userId}`)
     }
 }
