@@ -49,6 +49,9 @@ public class DatabaseInitializer implements ApplicationListener<ContextRefreshed
     @Value("${super-admin.password}")
     private String superAdminPassword;
 
+    @Value("${user.password}")
+    private String userPassword;
+
     @Override
     public void onApplicationEvent(@NonNull ContextRefreshedEvent contextRefreshedEvent) {
         this.loadRoles();
@@ -109,14 +112,14 @@ public class DatabaseInitializer implements ApplicationListener<ContextRefreshed
         RegisterUserDto[] usersDtos = new RegisterUserDto[] {
             new RegisterUserDto(
             "robertomembiel@seguro.com",
-            "$2a$10$xpcWXBuYlXcVTSK5ezvXdOitgURaV5a/2YzMyfM0jThg7Sji0Yk8e",
-            "$2a$10$xpcWXBuYlXcVTSK5ezvXdOitgURaV5a/2YzMyfM0jThg7Sji0Yk8e",
+            userPassword,
+            userPassword,
             "Roberto",
             "Membiel"
             ), new RegisterUserDto(
             "catalinaperez@bamboo.com",
-            "$2a$10$79hS1p5o.j4wO/1cm3NICekV9ELms1396y9TRA5vCRUyXvNhi1A1y",
-            "$2a$10$79hS1p5o.j4wO/1cm3NICekV9ELms1396y9TRA5vCRUyXvNhi1A1y",
+            userPassword,
+            userPassword,
             "Catalina",
             "Pérez"
             )
@@ -134,7 +137,7 @@ public class DatabaseInitializer implements ApplicationListener<ContextRefreshed
             user.setName(userDto.getName());
             user.setSurname(userDto.getSurname());
             user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             user.setRole(optionalRole.get());
 
             userRepository.save(user);
