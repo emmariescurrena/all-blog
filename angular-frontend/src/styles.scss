@@ -5,19 +5,71 @@
 @import 'bootstrap/scss/variables-dark';
 
 $primary: $yellow-300; // set the $primary variable
+$success: $yellow-500;
+$text-color: $black;
+$text-color-dark: $white;
 $background-color: #3e3045;
+$background-color-dark: #34273a;
 
 // merge with existing $theme-colors map
-$theme-colors: map-merge($theme-colors, ("primary": $primary));
+$theme-colors: map-merge($theme-colors, ("primary": $primary,
+            "success": $success ));
 
 // set changes
 @import "bootstrap/scss/bootstrap";
 
-body {
-    color: $white;
+* {
+    color: $text-color-dark;
+}
+
+app-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: $background-color;
+}
+
+app-register {
+    flex: 1;
+    display: flex;
+    @extend .justify-content-center;
+    @extend .align-items-center;
+}
+
+main {
+    flex: 1;
+    max-width: 40em;
 }
 
 a {
     text-decoration: none;
+}
+
+nav,
+footer {
+    background-color: $background-color-dark;
+}
+
+nav {
+    @extend .navbar;
+    @extend .navbar-expand-lg;
+    @extend .fixed-top;
+}
+
+.nav-link {
+    color: $text-color-dark;
+}
+
+footer {
+    @extend .d-flex;
+}
+
+form {
+    @extend .rounded;
+}
+
+.container {
+    @extend .border;
+    @extend .rounded;
 }
