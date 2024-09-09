@@ -3,18 +3,18 @@
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/variables-dark';
 
-.navLink {
-    color: $dark;
+.nav-link {
+    color: inherit;
 }
 
-.navLink:hover {
-    color: $dark;
+.nav-link:hover {
+    color: inherit;
 }
 
-.navLink:active {
-    color: $dark;
+.nav-link:active {
+    color: inherit;
 }
 
-.navLink:focus {
-    color: $dark;
+.nav-link:focus {
+    color: inherit;
 }
