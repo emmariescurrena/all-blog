@@ -26,3 +26,10 @@ form {
     @extend .border;
     @extend .rounded;
 }
+
+app-register {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
