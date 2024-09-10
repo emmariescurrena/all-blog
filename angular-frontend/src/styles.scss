@@ -30,17 +30,7 @@ app-root {
     background-color: $background-color;
 }
 
-app-register {
-    flex: 1;
-    display: flex;
-    @extend .justify-content-center;
-    @extend .align-items-center;
-}
 
-main {
-    flex: 1;
-    max-width: 40em;
-}
 
 a {
     text-decoration: none;
@@ -65,7 +55,7 @@ nav {
 footer {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     gap: 0.5em;
 
     img {
