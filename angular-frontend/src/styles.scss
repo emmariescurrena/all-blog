@@ -1,25 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
-
-$primary: $yellow-300; // set the $primary variable
-$success: $yellow-500;
-$text-color: $black;
-$text-color-dark: $white;
-$background-color: #3e3045;
-$background-color-dark: #34273a;
-
-// merge with existing $theme-colors map
-$theme-colors: map-merge($theme-colors, ("primary": $primary,
-            "success": $success ));
-
-// set changes
 @import "bootstrap/scss/bootstrap";
 
 * {
-    color: $text-color-dark;
+    color: $light;
 }
 
 app-root {
@@ -27,41 +10,11 @@ app-root {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: $background-color;
+    background-color: $dark;
 }
-
-
 
 a {
     text-decoration: none;
-}
-
-nav,
-footer {
-    background-color: $background-color-dark;
-    min-height: 4em;
-}
-
-nav {
-    @extend .navbar;
-    @extend .navbar-expand-md;
-    @extend .fixed-top;
-}
-
-.nav-link {
-    color: $text-color-dark;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5em;
-
-    img {
-        width: 2em;
-        height: 2em;
-    }
 }
 
 form {

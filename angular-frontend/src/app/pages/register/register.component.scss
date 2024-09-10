@@ -3,8 +3,8 @@
 app-register {
     flex: 1;
     display: flex;
-    @extend .justify-content-center;
-    @extend .align-items-center;
+    justify-content: center;
+    align-items: center;
 }
 
 main {

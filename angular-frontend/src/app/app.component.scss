@@ -1,20 +1,39 @@
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/bootstrap';
+
+nav,
+footer {
+    background-color: $dark;
+    min-height: 4em;
+}
+
+nav {
+    @extend .navbar;
+    @extend .navbar-expand-md;
+    @extend .fixed-top;
+}
+
 
 .nav-link {
-    color: inherit;
+
+    &:hover,
+    &:link,
+    &:active,
+    &:visited {
+        color: $light;
+    }
+
 }
 
-.nav-link:hover {
-    color: inherit;
-}
 
-.nav-link:active {
-    color: inherit;
-}
 
-.nav-link:focus {
-    color: inherit;
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+
+    img {
+        width: 2em;
+        height: 2em;
+    }
 }
