@@ -49,11 +49,12 @@ a {
 nav,
 footer {
     background-color: $background-color-dark;
+    min-height: 4em;
 }
 
 nav {
     @extend .navbar;
-    @extend .navbar-expand-lg;
+    @extend .navbar-expand-md;
     @extend .fixed-top;
 }
 
@@ -62,7 +63,15 @@ nav {
 }
 
 footer {
-    @extend .d-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 0.5em;
+
+    img {
+        width: 2em;
+        height: 2em;
+    }
 }
 
 form {
