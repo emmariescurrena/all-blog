@@ -10,6 +10,8 @@ nav {
     @extend .navbar;
     @extend .navbar-expand-md;
     @extend .fixed-top;
+    @extend .container-fluid;
+    @extend .px-5;
 }
 
 .nav-link {
@@ -32,5 +34,15 @@ footer {
     img {
         width: 2em;
         height: 2em;
+    }
+}
+
+#nav-btn {
+    @extend .navbar-toggler;
+    color: $light;
+
+    &:focus {
+        box-shadow: none;
+        border: 2px solid $light;
     }
 }
