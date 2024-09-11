@@ -1,25 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/forms";
 
 
-* {
-    color: $light;
-}
+* {}
 
 app-root {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: $dark;
 }
 
 a {
     text-decoration: none;
-}
-
-form {
-    @extend .rounded;
 }
 
 .container {
@@ -32,4 +26,22 @@ app-register {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    div {
+        display: flex;
+        flex-direction: inherit;
+        gap: 0.25em;
+    }
+
+    input {
+        @extend .form-control;
+
+        &:focus {}
+    }
 }

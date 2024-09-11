@@ -2,7 +2,6 @@
 
 nav,
 footer {
-    background-color: $dark-bg-subtle-dark;
     min-height: 4em;
 }
 
@@ -19,9 +18,7 @@ nav {
     &:hover,
     &:link,
     &:active,
-    &:visited {
-        color: $light;
-    }
+    &:visited {}
 
 }
 
@@ -39,10 +36,8 @@ footer {
 
 #nav-btn {
     @extend .navbar-toggler;
-    color: $light;
 
     &:focus {
         box-shadow: none;
-        border: 2px solid $light;
     }
 }
