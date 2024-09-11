@@ -1,3 +1,4 @@
+@if (user) {
 <nav>
     <button id="nav-btn" type="button" data-bs-toggle="collapse" aria-controls="navbarDiv" data-bs-target="#navbarDiv"
         aria-expanded="false" aria-label="Toggle navigation">
@@ -5,17 +6,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarDiv">
         <div class="navbar-nav mr-auto">
-            @if (!user) {
-            <a class="nav-link" routerLink="/register" ariaCurrent="page">Register</a>
-            <a class="nav-link" routerLink="/login" ariaCurrent="page">Login</a>
-            } @else {
             <a class="nav-link" routerLink="/home" ariaCurrent="page">Home</a>
             <a class="nav-link" routerLink="/users/me" ariaCurrent="page">Profile</a>
             <a class="nav-link" routerLink="/logout" ariaCurrent="page">Logout</a>
-            }
         </div>
     </div>
 </nav>
+}
 
 <!-- Makes header part of the layout 
 <div style="height: 4em"></div>
