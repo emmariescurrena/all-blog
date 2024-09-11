@@ -1,8 +1,11 @@
 @if (errors){
-<div>
-    @for (error of errors; track $index) {
-    <p>{{ error }}</p>
-    }
+<div id="errors">
+    @if (errors.length < 2) { <p><b>Error:</b> {{ errors }}</p> }
+        @else { <p><b>Errors:</b></p>
+        @for (error of errors; track $index) {
+        <p>{{ error }}</p>
+        }
+        }
 </div>
 }
 <main>

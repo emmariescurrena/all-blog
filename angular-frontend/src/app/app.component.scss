@@ -13,14 +13,6 @@ nav {
     @extend .px-5;
 }
 
-.nav-link {
-
-    &:hover,
-    &:link,
-    &:active,
-    &:visited {}
-
-}
 
 footer {
     display: flex;

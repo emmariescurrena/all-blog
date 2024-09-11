@@ -2,8 +2,8 @@
 
 main {
     @extend .rounded-5;
-    padding: 2em;
-    flex: 1;
+    padding: 1.5em;
+    width: 100%;
     max-width: 40em;
     border: 2px solid;
 }
