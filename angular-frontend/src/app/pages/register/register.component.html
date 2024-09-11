@@ -1,9 +1,9 @@
 @if (errors){
 <div id="errors">
-    @if (errors.length < 2) { <p><b>Error:</b> {{ errors }}</p> }
-        @else { <p><b>Errors:</b></p>
+    @if (errors.length < 2) { <p>{{ errors }}</p> }
+        @else {
         @for (error of errors; track $index) {
-        <p>{{ error }}</p>
+        <p>- {{ error }}</p>
         }
         }
 </div>
