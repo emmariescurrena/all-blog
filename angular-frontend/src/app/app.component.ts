@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private route: ActivatedRoute,
-        private router: Router
     ) {
         this.authService.user.subscribe(user => this.user = user);
     }
