@@ -1,0 +1,33 @@
+@import "bootstrap/scss/bootstrap";
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+#homeTitle {
+    @extend .container;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+article {
+    @extend .container;
+    @extend .rounded-4;
+    padding: 1em 1.25em;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    a {
+        text-decoration: none;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}

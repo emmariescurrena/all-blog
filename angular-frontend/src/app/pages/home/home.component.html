@@ -1,26 +1,30 @@
-<div class="container d-flex justify-content-between align-items-center mt-4 py-1 px-5">
-    <h1 class="text-primary m-0">Home</h1>
-    <a routerLink="/posts/create-post" ariaCurrent="page" class="btn btn-primary btn-lg rounded-pill">
-        Create post
-    </a>
-</div>
-@if (loading) {
-<div class="spinner-border spinner-border-sm"></div>
-}
-@if (posts) {
-@for (post of posts; track $index) {
-<article class="container rounder">
-    <a routerLink="/posts/{{ post.id }}" class="text-decoration-none">
-        <h2>
-            @if (post.title.length > 80) { {{ post.title.slice(0, 80) }}... }
-            @else { {{ post.title }} }
-        </h2>
-        <p>
-            @if (post.body.length > 150) { {{ post.body.slice(0, 150) }}...}
-            @else { {{ post.body }} }
-        </p>
-    </a>
-    <p>Author: {{ post.user.name }} {{ post.user.surname }}</p>
-</article>
-}
-}
+<main>
+    <div id="homeTitle">
+        <h1>Home</h1>
+        <a routerLink="/posts/create-post" ariaCurrent="page" class="btn btn-primary btn-lg rounded-pill">
+            Create post
+        </a>
+    </div>
+    @if (loading) {
+    <div class="spinner-border spinner-border-sm"></div>
+    }
+    @if (posts) {
+    @for (post of posts; track $index) {
+    <article>
+        <a routerLink="/posts/{{ post.id }}">
+            <h2>
+                @if (post.title.length > 80) { {{ post.title.slice(0, 80) }}... }
+                @else { {{ post.title }} }
+            </h2>
+            <p>
+                @if (post.body.length > 150) { {{ post.body.slice(0, 150) }}...}
+                @else { {{ post.body }} }
+            </p>
+        </a>
+        <a routerLink="/users/{{ post.user.id }}">
+            <p>{{ post.user.name }} {{ post.user.surname }}</p>
+        </a>
+    </article>
+    }
+    }
+</main>
