@@ -15,6 +15,9 @@ nav {
 
 
 footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +26,10 @@ footer {
     img {
         width: 2em;
         height: 2em;
+    }
+
+    p {
+        margin-bottom: 0;
     }
 }
 

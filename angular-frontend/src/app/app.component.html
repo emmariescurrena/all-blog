@@ -12,11 +12,11 @@
         </div>
     </div>
 </nav>
+<!-- Makes header part of the layout -->
+<div style="height: 4em"></div>
 }
 
-<!-- Makes header part of the layout 
-<div style="height: 4em"></div>
--->
+
 
 @if (infoMessage) {
 <p>{{ infoMessage }}</p>
@@ -24,9 +24,9 @@
 
 <router-outlet class="d-none" />
 
-
+<div style="height: 4em"></div>
 <footer>
-    <p class="mb-0">© emmariescurrena</p>
+    <p>© emmariescurrena</p>
     <a href="https://github.com/emmariescurrena" target="_blank">
         <img id="githubImg" src="/img/github-mark-white.svg" alt="github">
     </a>
