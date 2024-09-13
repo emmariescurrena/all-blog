@@ -1,6 +1,7 @@
 package com.emmariescurrena.all_blog.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.emmariescurrena.all_blog.dtos.UpdateUserDto;
+import com.emmariescurrena.all_blog.dtos.UserDto;
 import com.emmariescurrena.all_blog.exceptions.NotFoundException;
 import com.emmariescurrena.all_blog.models.RoleEnum;
 import com.emmariescurrena.all_blog.models.User;
@@ -35,13 +37,19 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/byId/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        return ResponseEntity.of(userService.getUserById(id));
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        return Optional
+            .ofNullable(userService.getUserById(id))
+            .map( user -> ResponseEntity.ok(new UserDto(user.get())) )          //200 OK
+            .orElseGet( () -> ResponseEntity.notFound().build() );
     }
 
     @GetMapping("/byEmail/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-        return ResponseEntity.of(userService.getUserByEmail(email));
+    public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) {
+        return Optional
+            .ofNullable(userService.getUserByEmail(email))
+            .map( user -> ResponseEntity.ok(new UserDto(user.get())) )          //200 OK
+            .orElseGet( () -> ResponseEntity.notFound().build() );
     }
 
     @GetMapping

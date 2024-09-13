@@ -1,24 +1,20 @@
 package com.emmariescurrena.all_blog.responses;
 
+import com.emmariescurrena.all_blog.dtos.UserDto;
 import com.emmariescurrena.all_blog.models.User;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class LoginResponse {
+@EqualsAndHashCode(callSuper = true)
+public class LoginResponse extends UserDto {
 
-    private Long id;
-    private String email;
-    private String name;
-    private String surname;
-    private String role;
     private String token;
 
-    public void copyPropertiesFromUser(User user) {
-        this.id = user.getId();
-        this.email = user.getEmail();
-        this.name = user.getName();
-        this.surname = user.getSurname();
-        this.role = user.getRole().getName().toString();
-    }
+    public LoginResponse(User user, String token) {
+        super(user);
+        this.setToken(token);
+    } 
+
 }
