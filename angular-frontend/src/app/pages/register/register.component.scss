@@ -1,9 +1,1 @@
 @import "bootstrap/scss/bootstrap";
-
-main {
-    @extend .rounded-5;
-    padding: 1.5em;
-    width: 100%;
-    max-width: 30em;
-    border: 2px solid;
-}

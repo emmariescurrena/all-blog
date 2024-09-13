@@ -8,7 +8,7 @@
         }
 </div>
 }
-<main>
+<main class="form-page">
     <h1>Register</h1>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmitForm()">
@@ -40,5 +40,7 @@
 
         <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid">Submit</button>
 
+        <p>Already registered? <a routerLink="/login" ariaCurrent="page">Log in</a></p>
     </form>
+
 </main>

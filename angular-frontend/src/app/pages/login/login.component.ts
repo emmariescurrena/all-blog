@@ -3,12 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { LoginUserDto } from '../../dtos/login-user-dto/login-user-dto';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { isPlatformServer } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, RouterModule],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
