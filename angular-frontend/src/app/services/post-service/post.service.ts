@@ -16,7 +16,7 @@ export class PostService {
     ) { }
 
     createPost(postDto: PostDto): Observable<any> {
-        return this.httpClient.post(`${BACKEND_URL}/posts`, postDto)
+        return this.httpClient.post(`${BACKEND_URL}/posts`, postDto, { observe: 'response' })
     }
 
     getPost(id: number): Observable<Post> {
