@@ -47,7 +47,7 @@ form {
 #errors {
     @extend .alert;
     @extend .alert-danger;
-    max-width: 40em;
+    max-width: 30em;
     margin-top: 2em;
 
     p {
