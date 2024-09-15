@@ -1,29 +1,46 @@
-@if (errors){
-<div>
-    @for (error of errors; track $index) {
-    <p>{{ error }}</p>
+<main>
+    <h1>Edit post</h1>
+    <p>This page uses markdown syntax for text parsing. Learn more <a href="https://www.markdownguide.org/basic-syntax/"
+            target="_blank">here</a></p>
+    @if (errors){
+    <div id="errors">
+        @for (error of errors; track $index) {
+        <p>{{ error }}</p>
+        }
+    </div>
     }
-</div>
-}
-@if (loading) {
-<div class="spinner-border spinner-border-sm"></div>
-}
+    @if (loading) {
+    <div class="spinner-border spinner-border-sm"></div>
+    }
 
-@if (updateForm) {
-<form [formGroup]="updateForm" (ngSubmit)="onSubmitForm()">
+    @if (updateForm) {
+    <div id="editPreview">
+        <div class="column">
+            <form [formGroup]="updateForm" (ngSubmit)="onSubmitForm()">
 
-    <div class="form-group">
-        <label>*Title:</label>
-        <input type="text" class="form-control" id="title" formControlName="title" name="title">
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" class="form-control" id="title" formControlName="title" name="title"
+                        [(ngModel)]="editedTitle">
+                </div>
+
+                <div class="form-group">
+                    <label>Body:</label>
+                    <textarea class="form-control" id="body" formControlName="body" name="body" rows="10"
+                        [(ngModel)]="editedBody"></textarea>
+                </div>
+
+                <button class="btn btn-success" type="submit" [disabled]="!updateForm.valid">Submit</button>
+
+            </form>
+        </div>
+
+        <div class="column">
+            <p>Preview</p>
+            <h1>{{ editedTitle }}</h1>
+            <markdown [data]="editedBody"></markdown>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label>*Body:</label>
-        <textarea class="form-control" id="body" formControlName="body" name="body" rows="10"></textarea>
-    </div>
-
-    <button class="btn btn-success" type="submit" [disabled]="!updateForm.valid">Submit</button>
-
-</form>
-<button class="btn btn-danger" type="submit" (click)="onDelete()">Delete post</button>
-}
+    }
+    <button class="btn btn-danger" type="submit" (click)="onDelete()">Delete post</button>
+</main>

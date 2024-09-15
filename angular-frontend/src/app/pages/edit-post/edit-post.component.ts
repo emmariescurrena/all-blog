@@ -6,11 +6,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { PostDto } from '../../dtos/post-dto/post-dto';
 import { User } from '../../models/user/user';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
     selector: 'app-edit-post',
     standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, MarkdownModule],
     templateUrl: './edit-post.component.html',
     styleUrl: './edit-post.component.scss'
 })
@@ -18,8 +19,10 @@ export class EditPostComponent {
     public errors!: [];
     public loading = false;
     public user: User | null;
-    public post!: Post;
+    public originalPost!: Post;
     public updateForm!: FormGroup;
+    public editedTitle!: string;
+    public editedBody!: string;
 
     constructor(
         private postService: PostService,
@@ -34,15 +37,17 @@ export class EditPostComponent {
         this.route.params.subscribe(params => {
             const id = params["id"];
             this.postService.getPost(id).subscribe({
-                next: post => {
-                    this.post = post;
+                next: originalPost => {
+                    this.originalPost = originalPost;
                     this.updateForm = new FormGroup({
-                        title: new FormControl(this.post?.title, Validators.required),
-                        body: new FormControl(this.post?.body, Validators.required)
+                        title: new FormControl("", Validators.required),
+                        body: new FormControl("", Validators.required)
                     });
-                    if (this.user?.id !== this.post.user.id) {
+                    this.editedTitle = this.originalPost?.title;
+                    this.editedBody = this.originalPost?.body;
+                    if (this.user?.id !== this.originalPost.user.id) {
                         this.router.navigate(
-                            [`/posts/${this.post.id}`],
+                            [`/posts/${this.originalPost.id}`],
                             { queryParams: { infoMessage: 'Not allowed to edit this post' } }
                         );
                     }
@@ -61,7 +66,7 @@ export class EditPostComponent {
 
         this.commitPost(postDto).subscribe({
             next: res => {
-                this.router.navigate([`/posts/${this.post.id}`]);
+                this.router.navigate([`/posts/${this.originalPost.id}`]);
             },
             error: e => {
                 this.errors = e.error.errors;
@@ -70,11 +75,11 @@ export class EditPostComponent {
     }
 
     commitPost(postDto: PostDto) {
-        return this.postService.updatePost(postDto, this.post.id);
+        return this.postService.updatePost(postDto, this.originalPost.id);
     }
 
     onDelete() {
-        this.postService.deletePost(this.post.id).subscribe({
+        this.postService.deletePost(this.originalPost.id).subscribe({
             next: res => this.router.navigate(['/home']),
             error: e => this.errors = e.error.errors
         });
