@@ -30,6 +30,10 @@ app-login {
     align-items: center;
 }
 
+main {
+    margin: 2em 0;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -84,6 +88,12 @@ article {
     }
 }
 
-main {
-    margin: 2em 0;
+#editPreview {
+    display: flex;
+    gap: 3em;
+    margin: 1em 0 2em;
+
+    .column {
+        flex: 1;
+    }
 }

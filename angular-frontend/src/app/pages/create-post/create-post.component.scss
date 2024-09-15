@@ -2,13 +2,6 @@
 
 main {
     @extend .container;
-}
-
-#editPreview {
     display: flex;
-    gap: 3em;
-}
-
-.column {
-    flex: 1;
+    flex-direction: column;
 }
