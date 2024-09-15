@@ -1,0 +1,29 @@
+@import 'bootstrap/scss/bootstrap';
+
+main {
+    @extend .container;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#postTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+article {
+    padding: 2em;
+    gap: 1.5em;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

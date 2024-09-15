@@ -1,14 +1,20 @@
-@if (loading) {
-<div class="spinner-border spinner-border-sm"></div>
-}
-
-@if (post) {
-@if (user?.id == post.user.id) {
-<a routerLink="/posts/edit-post/{{ post.id }}" ariaCurrent="page" class="btn btn-primary btn-lg rounded-pill">
-    Edit post
-</a>
-}
-<h1>{{ post.title }}</h1>
-<p>{{ post.body }} </p>
-<p>Author: {{ post.user.name }} {{ post.user.surname }}</p>
-}
+<main>
+    @if (loading) {
+    <div class="spinner-border spinner-border-sm"></div>
+    }
+    @if (post) {
+    <article>
+        <div id="postTitle">
+            <h1>{{ post.title }}</h1>
+            @if (user?.id == post.user.id) {
+            <a routerLink="/posts/edit-post/{{ post.id }}" ariaCurrent="page"
+                class="btn btn-primary btn-lg rounded-pill">
+                Edit post
+            </a>
+            }
+        </div>
+        <markdown [data]="post.body"></markdown>
+        <p>Author: <a routerLink="/users/{{ post.user.id }}">{{ post.user.name }} {{ post.user.surname }}</a></p>
+    </article>
+    }
+</main>
