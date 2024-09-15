@@ -47,6 +47,16 @@ form {
     }
 }
 
+article {
+    @extend .container;
+    @extend .rounded-4;
+    padding: 1em 1.25em;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
 #errors,
 .form-page {
     width: 100%;
