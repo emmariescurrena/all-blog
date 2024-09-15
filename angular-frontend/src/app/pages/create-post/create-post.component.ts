@@ -14,7 +14,7 @@ import { MarkdownModule } from 'ngx-markdown';
     styleUrl: './create-post.component.scss'
 })
 export class CreatePostComponent {
-    public errors = [];
+    public errors!: [];
     public title!: string;
     public body!: string;
 
