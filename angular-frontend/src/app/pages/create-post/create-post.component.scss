@@ -1,0 +1,14 @@
+@import 'bootstrap/scss/bootstrap';
+
+main {
+    @extend .container;
+}
+
+#editPreview {
+    display: flex;
+    gap: 3em;
+}
+
+.column {
+    flex: 1;
+}

@@ -1,23 +1,41 @@
-@if (errors.length){
-<div>
-    @for (error of errors; track $index) {
-    <p>{{ error }}</p>
+<main>
+
+
+    <h1>Create post</h1>
+    <p>This page uses markdown syntax for text parsing. Learn more <a href="https://www.markdownguide.org/basic-syntax/"
+            target="_blank">here</a></p>
+    @if (errors.length){
+    <div id="errors">
+        @for (error of errors; track $index) {
+        <p>{{ error }}</p>
+        }
+    </div>
     }
-</div>
-}
+    <div id="editPreview">
+        <div class="column">
+            <form [formGroup]="createForm" (ngSubmit)="onSubmitForm()">
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmitForm()">
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" class="form-control" id="title" formControlName="title" name="title"
+                        [(ngModel)]="title">
+                </div>
 
-    <div class="form-group">
-        <label>*Title:</label>
-        <input type="text" class="form-control" id="title" formControlName="title" name="title">
+                <div class="form-group">
+                    <label>Body:</label>
+                    <textarea class="form-control" id="body" formControlName="body" name="body" rows="10"
+                        [(ngModel)]="body"></textarea>
+                </div>
+
+                <button class="btn btn-success" type="submit" [disabled]="!createForm.valid">Submit</button>
+
+            </form>
+        </div>
+
+        <div class="column">
+            <p>Preview</p>
+            <h1>{{ title }}</h1>
+            <markdown [data]="body">{{ body }}</markdown>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label>*Body:</label>
-        <textarea class="form-control" id="body" formControlName="body" name="body" rows="10"></textarea>
-    </div>
-
-    <button class="btn btn-success" type="submit" [disabled]="!createForm.valid">Submit</button>
-
-</form>
+</main>

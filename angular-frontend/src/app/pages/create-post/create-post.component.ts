@@ -3,16 +3,20 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { PostService } from '../../services/post-service/post.service';
 import { Router } from '@angular/router';
 import { PostDto } from '../../dtos/post-dto/post-dto';
+import { MarkdownModule } from 'ngx-markdown';
+
 
 @Component({
     selector: 'app-create-post',
     standalone: true,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, MarkdownModule],
     templateUrl: './create-post.component.html',
     styleUrl: './create-post.component.scss'
 })
 export class CreatePostComponent {
     public errors = [];
+    public title: string = "Example title";
+    public body: string = "";
 
     public createForm = new FormGroup({
         title: new FormControl("", Validators.required),
@@ -21,8 +25,9 @@ export class CreatePostComponent {
 
     constructor(
         private postService: PostService,
-        private router: Router
-    ) { }
+        private router: Router) {
+    }
+
 
     onSubmitForm() {
         const postDto = new PostDto();
