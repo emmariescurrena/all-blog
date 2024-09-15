@@ -27,6 +27,8 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "5.3.3",
     "express": "^4.19.2",
+    "marked": "^12.0.0",
+    "ngx-markdown": "^18.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.7.0",
     "zone.js": "~0.14.10"

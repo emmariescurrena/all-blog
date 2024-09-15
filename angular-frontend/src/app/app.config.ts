@@ -5,6 +5,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { JwtInterceptor } from './interceptors/jwt-interceptor/jwt.interceptor';
 import { CoolStorageModule } from '@angular-cool/storage';
+import { provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -12,7 +13,8 @@ export const appConfig: ApplicationConfig = {
         provideRouter(routes),
         provideClientHydration(),
         provideHttpClient(withFetch(), withInterceptors([JwtInterceptor])),
-        importProvidersFrom(CoolStorageModule.forRoot())
+        importProvidersFrom(CoolStorageModule.forRoot()),
+        provideMarkdown(),
     ],
 };
 
