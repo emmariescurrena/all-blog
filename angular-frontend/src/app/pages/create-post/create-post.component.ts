@@ -15,8 +15,8 @@ import { MarkdownModule } from 'ngx-markdown';
 })
 export class CreatePostComponent {
     public errors = [];
-    public title: string = "Example title";
-    public body: string = "";
+    public title!: string;
+    public body!: string;
 
     public createForm = new FormGroup({
         title: new FormControl("", Validators.required),
