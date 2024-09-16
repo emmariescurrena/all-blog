@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { User } from './models/user/user';
 import { AuthService } from './services/auth-service/auth.service';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -12,14 +13,17 @@ import { AuthService } from './services/auth-service/auth.service';
     styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-    title = 'all-blog';
+    public title = 'all-blog';
     public user!: User | null;
     public infoMessage!: string;
+    private theme: 'light' | 'dark' = 'dark';
 
     constructor(
         private authService: AuthService,
         private route: ActivatedRoute,
+        @Inject(DOCUMENT) private document: Document
     ) {
+        this.applyTheme();
         this.authService.user.subscribe(user => this.user = user);
     }
 
@@ -31,6 +35,15 @@ export class AppComponent implements OnInit {
                 this.infoMessage = "";
             }
         });
+    }
+
+    public changeTheme() {
+        this.theme = this.theme == 'dark' ? 'light' : 'dark';
+        this.applyTheme();
+    }
+
+    private applyTheme() {
+        this.document.body.setAttribute('data-bs-theme', this.theme);
     }
 
 }

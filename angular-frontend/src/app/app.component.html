@@ -1,6 +1,6 @@
 @if (user) {
 <nav>
-    <button id="nav-btn" type="button" data-bs-toggle="collapse" aria-controls="navbarDiv" data-bs-target="#navbarDiv"
+    <button id="navBtn" type="button" data-bs-toggle="collapse" aria-controls="navbarDiv" data-bs-target="#navbarDiv"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,10 +11,15 @@
             <a class="nav-link" routerLink="/logout" ariaCurrent="page">Logout</a>
         </div>
     </div>
+    <button id="themeBtn" (click)="changeTheme()" data-theme-toggle aria-label="Change color theme">
+        <img src="/img/theme-icon.svg" alt="theme-icon">
+    </button>
 </nav>
 <!-- Makes header part of the layout -->
 <div style="height: 4em"></div>
 }
+
+
 
 @if (infoMessage) {
 <div id="infoMessage">
@@ -27,6 +32,6 @@
 <div id="createdBy">
     <p>© emmariescurrena</p>
     <a href="https://github.com/emmariescurrena" target="_blank">
-        <img id="githubImg" src="/img/github-mark.svg" alt="github">
+        <img id="githubImg" src="/img/github-mark-white.svg" alt="github">
     </a>
 </div>
