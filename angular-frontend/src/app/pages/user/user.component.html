@@ -1,8 +1,12 @@
-@if (loading) {
-<div class="spinner-border spinner-border-sm"></div>
-}
-@if (userApi) {
-<h2>{{ userApi.name }} {{ userApi.surname }}</h2>
-<p>Role: {{ userApi.role }} </p>
-<p>Contact: {{ userApi.email }}</p>
-}
+<main>
+    @if (loading) {
+    <div class="spinner-border spinner-border-sm"></div>
+    }
+    @if (userApi) {
+    <div>
+        <h2>{{ userApi.name }} {{ userApi.surname }}</h2>
+        <p>Role: {{ userApi.role }} </p>
+        <p>Contact: {{ userApi.email }}</p>
+    </div>
+    }
+</main>
