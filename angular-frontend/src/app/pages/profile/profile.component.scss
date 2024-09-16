@@ -1,0 +1,12 @@
+@import 'bootstrap/scss/bootstrap';
+
+main {
+    @extend .container;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+p {
+    margin: 0;
+}
