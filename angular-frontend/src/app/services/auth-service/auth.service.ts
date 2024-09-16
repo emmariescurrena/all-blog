@@ -52,7 +52,11 @@ export class AuthService {
         if (!token) {
             return false;
         }
-        return !this.jwtService.tokenExpired(token);
+        if (this.jwtService.tokenExpired(token)) {
+            this.logout();
+            return false;
+        }
+        return true;
     }
 
     logout() {
