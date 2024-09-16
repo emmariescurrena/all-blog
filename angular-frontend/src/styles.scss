@@ -61,6 +61,23 @@ article {
     gap: 0.5em;
 }
 
+.btn-default {
+    @extend .btn;
+    @extend .btn-primary;
+    @extend .btn-lg;
+    @extend .rounded-pill;
+}
+
+.form-page {
+    @extend .rounded-5;
+    padding: 1em 1.25em;
+    border: 2px solid;
+
+    p {
+        margin: 0;
+    }
+}
+
 #errors,
 .form-page {
     width: 100%;
@@ -72,16 +89,6 @@ article {
     @extend .alert-danger;
 
     margin-top: 1em;
-
-    p {
-        margin: 0;
-    }
-}
-
-.form-page {
-    @extend .rounded-5;
-    padding: 1em 1.25em;
-    border: 2px solid;
 
     p {
         margin: 0;

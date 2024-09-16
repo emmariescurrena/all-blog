@@ -7,10 +7,9 @@
         <div id="postTitle">
             <h1>{{ post.title }}</h1>
             @if (user?.id == post.user.id) {
-            <a routerLink="/posts/edit-post/{{ post.id }}" ariaCurrent="page"
-                class="btn btn-primary btn-lg rounded-pill">
+            <button type="button" routerLink="/posts/edit-post/{{ post.id }}" ariaCurrent="page" class="btn-default">
                 Edit post
-            </a>
+            </button>
             }
         </div>
         <markdown [data]="post.body"></markdown>

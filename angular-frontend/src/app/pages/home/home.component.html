@@ -1,9 +1,9 @@
 <main>
     <div id="homeTitle">
         <h1>Home</h1>
-        <a routerLink="/posts/create-post" ariaCurrent="page" class="btn btn-primary btn-lg rounded-pill">
+        <button type="button" routerLink="/posts/create-post" ariaCurrent="page" class="btn-default">
             Create post
-        </a>
+        </button>
     </div>
     @if (loading) {
     <div class="spinner-border spinner-border-sm"></div>
