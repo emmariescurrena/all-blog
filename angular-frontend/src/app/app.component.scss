@@ -44,3 +44,15 @@ nav {
         margin-bottom: 0;
     }
 }
+
+#infoMessage {
+    @extend .container;
+    @extend .alert;
+    @extend .alert-info;
+
+    margin-top: 1em;
+
+    p {
+        margin: 0;
+    }
+}
