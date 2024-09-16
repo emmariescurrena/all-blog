@@ -1,26 +1,28 @@
-<h1>User List</h1>
-@if (loading) {
-<div class="spinner-border spinner-border-sm"></div>
-}
-@if (users) {
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (user of users; track $index) {
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.surname }}</td>
-            <td>{{ user.email }}</td>
-        </tr>
-        }
-    </tbody>
-</table>
-}
+<main>
+    <h1>User List</h1>
+    @if (loading) {
+    <div class="spinner-border spinner-border-sm"></div>
+    }
+    @if (users) {
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (user of users; track $index) {
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    }
+</main>
