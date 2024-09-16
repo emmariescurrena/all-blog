@@ -23,6 +23,7 @@ nav {
 }
 
 #createdBy {
+    @extend .rounded-pill;
     all: unset;
     display: flex;
     position: fixed;
@@ -33,11 +34,12 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 0.5em;
-    background-color: aqua;
+    padding: 0.5em;
+    border: 2px solid;
 
     img {
-        width: 2em;
-        height: 2em;
+        width: 1.75em;
+        height: 1.75em;
     }
 
     p {
