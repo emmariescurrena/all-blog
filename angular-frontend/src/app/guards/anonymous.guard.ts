@@ -11,11 +11,11 @@ export class AnonymousGuard implements CanActivate {
         private router: Router) { }
 
     canActivate(): boolean {
-        if (!this.authService.isLoggedIn()) {
-            return true;
-        } else {
+        if (this.authService.isLoggedIn()) {
             this.router.navigate(["/home"]);
             return false;
+        } else {
+            return true;
         }
     }
 }
