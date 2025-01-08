@@ -1,5 +1,5 @@
 # all-blog, Blog for all
-all-blog is an app that allos users to create, edit and delete posts and view others' posts and profiles. It parses posts using md to give these a better look.
+all-blog is an app that allows users to create, edit and delete posts and view others' posts and profiles. It parses posts using md to give these a better look.
 
 ## Purpose
 At first, this project was going to be a personal blog. But, being that I wanted to build something more sophisticated using Spring and Angular, I ended up deciding to do this project. It had to be simple, as it was originally going to be, but allowing more people to create posts.
